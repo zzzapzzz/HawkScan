@@ -37,7 +37,7 @@ def bypass_waf(req, res):
 				#print(vrfy)
 				if vrfy == False:
 					#win = True
-					print("{} You can bypass with: {} !".format(PLUS, headers))
+					print("{} You can bypass the WAF with: {} !".format(PLUS, headers))
 					return headers
 			except Exception:
 				traceback.print_exc()
@@ -50,7 +50,7 @@ def bypass_waf(req, res):
 			vrfy = verify_waf(req, res, headers, display)
 			if vrfy == False:
 				#win = True
-				print("{} You can bypass with: {} !".format(PLUS, headers))
+				print("{} You can bypass the WAF with: {} !".format(PLUS, headers))
 				return headers
 		except:
 			traceback.print_exc()

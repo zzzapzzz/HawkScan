@@ -32,7 +32,7 @@ def waybackurls(host, with_subs):
         j = open(args.outputfile, "w")
         j.write(r.text.strip())
         j.close()
-    print r.text.strip()
+    print(r.text.strip())
     
 
 def check(url):
@@ -71,11 +71,11 @@ def check(url):
         cType = "Unknown"
     if str(status_code)[0] == "3":
         rUrl = req.headers["Location"]
-        print ", ".join([url, str(status_code), cLength, cType, rUrl])
+        print(", ".join([url, str(status_code), cLength, cType, rUrl]))
         if args.outputfile:
             writeQueue.put(", ".join([url, str(status_code), cLength, cType, rUrl])+"\n")
     else:
-        print ", ".join([url, str(status_code), cLength, cType])
+        print(", ".join([url, str(status_code), cLength, cType]))
         if args.outputfile:
             writeQueue.put(", ".join([url, str(status_code), cLength, cType])+"\n")
 
@@ -135,14 +135,14 @@ elif args.function == "check":
                 p.join()
                 outputfile.close()
         except IOError as e:
-            print "[-] File not found!"
+            print("[-] File not found!")
             sys.exit(1)
         except KeyboardInterrupt as e:
-            print "[-] Killing processes..."
+            print("[-] Killing processes...")
             pool.terminate()
             sys.exit(1)
         except Exception as e:
-            print "[-] Unknown Error: "+str(e)
+            print("[-] Unknown Error: "+str(e))
 
     elif not sys.stdin.isatty():
         try:
@@ -157,15 +157,15 @@ elif args.function == "check":
                 p.join()
                 outputfile.close()
         except IOError as e:
-            print e
-            print "[-] File not found!"
+            print(e)
+            print("[-] File not found!")
             sys.exit(1)
         except KeyboardInterrupt as e:
-            print "[-] Killing processes..."
+            print("[-] Killing processes...")
             pool.terminate()
             sys.exit(1)
         except Exception as e:
-            print "[-] Unknown Error: "+str(e)
+            print("[-] Unknown Error: "+str(e))
     else:
-        print "[-] Please either specify a file using --loadfile or pipe some data in!"
+        print("[-] Please either specify a file using --loadfile or pipe some data in!")
         exit()

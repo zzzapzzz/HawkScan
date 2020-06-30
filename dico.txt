@@ -17,7 +17,6 @@ index.php
 index.php?-s
 index.html
 index/
-index.php/?=PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000
 _clockwork
 __clockwork
 ;index.jsp
@@ -135,6 +134,7 @@ openx/www/admin/stats.php
 wp-admin/
 wp-admin/js/
 wp-admin/admin-ajax.php?action=kbslider_show_image&img=../wp-config.php
+index.php/?=PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000
 wp-admin/includes/
 wp-content/uploads/db-backup
 wp-admin.php
@@ -4552,6 +4552,9 @@ vcss/
 vell/
 velvet/
 vendor/
+vendor/composer/
+vendor/composer/installed.json
+vendor/composer/LICENSE
 ventana/
 venus/
 ver/
@@ -6757,6 +6760,7 @@ ping/activity
 home-page/information-bloc
 APP
 app-admin
+configprops
 app.config
 app.js
 app.dev.js

@@ -35,7 +35,7 @@ from modules.mini_scans import mini_scans
 from modules.parsing_html import parsing_html
 from modules.detect_scan import detect_scans
 from modules.bypass_waf import bypass_waf
-
+ 
 def banner():
     print("""
   _    _                _     _____                 
@@ -253,7 +253,7 @@ def detect_waf(url, directory, thread):
                         print(LINE)
                         return int(enter_thread)
                     else:
-                        print("If you enter 0 that's will doesn't work :)")
+                        print("If you enter 0 or less that's will doesn't work :)")
                         sys.exit()
         else:
             print("\t{}This website dos not use WAF".format(LESS))
@@ -396,8 +396,9 @@ def file_backup(s, res, directory, forbi, HOUR):
     size_check = 0
 
     ext_b = ['.key', '.log', '.ini', '.env', '.dat', '.conf', '.config', '.cgi', '.bok', '.bkf', '.action', 
-    '.save', '.old', '.NEW', '.backup', '.BAK', '.bak', '.zip', '.rar', '~', '_old', '_backup', '_bak', 
-    '/..%3B/', '/%20../', "?stats=1", "/authorize/", ".json", ".bkp", ".wml", ".xls", ".xlsx", ".xml", ".xsd", ".yml"]
+    '.save', '.old', '.NEW', '.backup', '.BAK', '.bak', '.bak1', '.zip', '.rar', '_old', '_backup', '_bak', 
+    '/..%3B/', '/%20../', "?stats=1", "authorize/", ".json", ".bkp", ".wml", ".xml", ".xsd", ".yml", ".lock", 
+    ".swp", ".db"]
     d_files = directory + "/files/"
     for exton in ext_b:
         res_b = res + exton
@@ -422,7 +423,7 @@ def file_backup(s, res, directory, forbi, HOUR):
             with open(r_files+"-file.txt", 'w+') as fichier_bak:
                 fichier_bak.write(str(soup))
             size_bytes = os.path.getsize(r_files+"-file.txt")
-            ranges = range(size_check - 30, size_check + 30) if size_check < 100000 else range(size_check - 1000, size_check + 1000)
+            ranges = range(size_check - 50, size_check + 50) if size_check < 100000 else range(size_check - 1000, size_check + 1000)
             if size_bytes == size_check or size_bytes in ranges:
                 #if the number of bytes of the page equal to size_check variable and not bigger than size_check +5 and not smaller than size_check -5
                 pass
@@ -706,11 +707,12 @@ def tryUrl(i, q, threads, manager=False, directory=False, forced=False, u_agent=
                 #verfiy_waf function, to check if waf detected, True: detected # False: not detected
                 if waf == True:
                     if tested_bypass == False:
-                        print("{}We try to bypass it...".format(INFO))
+                        #print("{}We try to bypass it...".format(INFO))
                         try_bypass_waf = bypass_waf(req, res)
                         #print(try_bypass_waf) #DEBUG
                         #print(user_agent) #DEBUG
                         if try_bypass_waf == False: # if not worked not repeat
+                            print("\033[31m[-]\033[0m Our tests not bypass it, sorry")
                             tested_bypass == True
                         elif try_bypass_waf and type(try_bypass_waf) is not bool:
                             user_agent.update(try_bypass_waf)
@@ -1096,7 +1098,10 @@ if __name__ == '__main__':
     if cookie_:
         s = cookie_.split(";")
         for c in s:
-            c = c.split("=", 1)
+            if "=" in c:
+                c = c.split("=", 1)
+            elif ":" in c:
+                c = c.split(":", 1)
             cookie_auth.update([(c[0],c[1])])
     with open(wordlist, 'r') as words:
         for l in words:

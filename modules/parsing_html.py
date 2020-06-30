@@ -23,7 +23,7 @@ class parsing_html:
             for s in search:
                 link = s.get("href")
                 try:
-                    if "http" in link or "https" in link:
+                    if re.match(r'http(s)', link):
                         with open(directory + "/links.txt", "a+") as links:
                             links.write(str(link+"\n"))
                     else:
@@ -72,16 +72,16 @@ class parsing_html:
         search = re.findall(reg, mails)
         for mail in search:
             #check if email pwned
-            if mail and not "png" in mail or not "jpg" in mail:
+            if mail and not "png" in mail or not "jpg" in mail or not "jpeg" in mail:
                 datas = { "act" : mail, "accounthide" : "test", "submit" : "Submit" }
-                req_ino = requests.post("https://www.inoitsu.com/", data=datas)
+                req_ino = requests.post("https://www.inoitsu.com/", data=datas, verify=False)
                 if "DETECTED" in req_ino.text:
                     pwnd = "{}: pwned ! ".format(mail)
-                    if pwnd not in all_mail and not "png" in mail or not "jpg" in mail:
+                    if pwnd not in all_mail:
                         all_mail.append(pwnd)
                 else:
                     no_pwned = "{}: no pwned ".format(mail)
-                    if no_pwned not in all_mail and not "png" in mail or not "jpg" in mail:
+                    if no_pwned not in all_mail:
                         all_mail.append(no_pwned)
         with open(directory + '/mail.csv', 'a+') as file:
             if all_mail is not None and all_mail != []:
