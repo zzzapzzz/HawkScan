@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 from config import PLUS, WARNING, INFO, LESS, LINE
 
-class detect_scans:
+class check_cms:
 
     def detect_cms(self, url, directory):
         """
@@ -34,6 +34,7 @@ class detect_scans:
                 print("\t{} This website use \033[32m{}\033[0m but nothing version found \n".format(PLUS, result))
                 print(LINE)
                 return False, False;
+                
 
     def cve_cms(self, result, v):
         """

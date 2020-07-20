@@ -8,7 +8,7 @@ def req_test_false_positif(res, headers):
     url_base = res.split("/")[:3]
     url_send = '/'.join(url_base)+"/"
     req_test_waf = requests.get(url_send, headers=headers, allow_redirects=True, verify=False)
-    #print(req_test_waf)
+    #print(req_test_waf)#DEBUG
     return req_test_waf
 
 def verify_waf(req, res, headers, display=True):
@@ -82,7 +82,7 @@ def verify_waf(req, res, headers, display=True):
             print("{}ASTRA WAF detected : {} ".format(INFO, res))
         return True
     #AWS ELB 
-    elif "Access Denied" in req_test.text and "AWSALB" in req_test.headers or "X-AMZ-ID" in req_test.headers or "X-AMZ-REQUEST-ID" in req_test.headers:
+    elif "AWSALB" in req_test.headers or "X-AMZ-ID" in req_test.headers or "X-AMZ-REQUEST-ID" in req_test.headers and "Access Denied" in req_test.text:
         if display:
             print ("{}AWS ELB WAF detected : {} ".format(INFO, res))
         return True
@@ -621,7 +621,8 @@ def verify_waf(req, res, headers, display=True):
             print("{}ZScaler WAF detected : {} ".format(INFO, res))
         return True
     elif "Access Denied" in req_test.text or "access denied" in req_test.text or "Something went wrong" in req_test.text or \
-    "we have detected malicious traffic" in req_test.text or "device from your location is sending large amounts of web requests" in req_test.text and not forced:
+    "we have detected malicious traffic" in req_test.text or "device from your location is sending large amounts of web requests" in req_test.text or \
+    "Sorry, there have been too many requests in a short time" in req_test.text and not forced:
         if req_test.status_code == 401 or req_test.status_code == 403 and not forced:
             if display:
                 print("{}{} Unknown WAF detected : {} ".format(INFO, req_test.status_code, res))

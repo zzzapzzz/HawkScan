@@ -126,6 +126,8 @@ vdoc/INSTALL.COMPILING
 vdoc/README
 ansible/Vagrantfile
 ansible/roles/common/tasks/main.yml
+common/db/
+common/db/logging
 cpresources/
 openx/
 openx/www/
@@ -150,6 +152,7 @@ wp/v2/settings
 wp-json/wp/v2/settings
 wp-json/yoast/v1/
 wp-activate.php
+wp-links-opml.php
 *.log
 .vagrant
 config.public.php
@@ -436,6 +439,7 @@ assets/
 upload/
 mail/
 nrotc/
+nrotc/Trace.axd
 app/plugins/saml-20-single-sign-on/saml/config/config.php
 xmlrpc.php
 apixmlrpc.php
@@ -639,6 +643,7 @@ Login/
 Logs/
 vi-logs/
 application/logs/
+application/logs
 M/
 M_images/
 Main/
@@ -1302,7 +1307,6 @@ carla/
 carlos/
 carmen/
 carofthemonth/
-carol/
 carole/
 carolina/
 caroline/
@@ -2217,6 +2221,9 @@ gary/
 gasman/
 gate/
 gateway/
+gateway/default/
+gateway/default/jupyter/
+gateway/default/jupyter/tree
 gator/
 gatt/
 gauss/
@@ -2459,6 +2466,10 @@ identity/
 idiot/
 ie/
 sitemap.xml.gz
+splunkd/__raw/services/server/info/server-info?output_mode=json
+en-US/splunkd/__raw/services/server/info/server-info?output_mode=json
+splunkd/
+__raw/services/server/info/server-info?output_mode=json
 iguana/
 iis/
 iisadmin/
@@ -3540,6 +3551,7 @@ products/
 prof/
 professor/
 profile/
+profile/rxs/
 profiles/
 program/
 programa/
@@ -4226,6 +4238,8 @@ dashboard.config
 config/umbracoSettings.config
 config/dashboard.config
 web.xml
+env-config.js
+env-config
 t/
 t-bone/
 t1/
@@ -4500,6 +4514,8 @@ user/
 user1/
 users/api/
 users/api/v1/
+users/api/v2/
+api/v2/status.json
 rest/api/
 rest/api/1/
 rest/api/2/
@@ -5447,6 +5463,8 @@ _cm_admin
 _common.xsl
 _config.inc
 _data/
+__data/
+__data/uploads/
 _data/error_log
 _dbadmin
 _docs.en/readme.txt

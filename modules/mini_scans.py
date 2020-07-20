@@ -23,6 +23,7 @@ class mini_scans:
         with open(directory + '/header.csv', 'w+') as file:
             file.write(str(head).replace(',','\n'))
 
+
     def gitpast(self, url):
         """
         Github: check github informations
@@ -49,6 +50,7 @@ class mini_scans:
                 print("  {}{}: not found".format(INFO, t))
         print("\n" + LINE)
 
+
     def who_is(self, url, directory):
         """Get whois of website"""
         print(INFO + "WHOIS")
@@ -69,6 +71,7 @@ class mini_scans:
             msgerr = u"%s" % (erreur[1])
             print(msgerr)
         print("\n" + LINE)
+
 
     def get_dns(self, url, directory):
         """Get DNS informations"""
@@ -104,6 +107,7 @@ class mini_scans:
             print(msgerr + "\n")
             print(LINE)
 
+
     def firebaseio(self, url):
         """
         Firebaseio: To check db firebaseio
@@ -126,19 +130,20 @@ class mini_scans:
         try:
             if 'error' in r.keys():
                 if r['error'] == 'Permission denied':
-                    print("  {}{} seems to be protected".format(FORBI, url)) #successfully protected
+                    print("\t{}{} seems to be protected".format(FORBI, url)) #successfully protected
                 elif r['error'] == '404 Not Found':
-                    print("  {}{} not found".format(LESS, url)) #doesn't exist
+                    print("\t{}{} not found".format(LESS, url)) #doesn't exist
                 elif "Firebase error." in r['error']:
-                    print("  {}{} Firebase error. Please ensure that you spelled the name of your Firebase correctly ".format(WARNING, url))
+                    print("\t{}{} Firebase error. Please ensure that you spelled the name of your Firebase correctly ".format(WARNING, url))
             else:
-                print("  {}{} seems to be vulnerable !".format(PLUS, url)) #vulnerable
+                print("\t{}{} seems to be vulnerable !".format(PLUS, url)) #vulnerable
         except AttributeError:
             '''
             Some DBs may just return null
             '''
             print("{} null return".format(INFO))
         print(LINE + "\n")
+        
 
     def wayback_check(self, url, directory):
         """
@@ -175,4 +180,25 @@ class mini_scans:
                             print("{}{}{}".format(INFO, wb_res[0], wb_res[1]))
                     except:
                         pass
+        print(LINE)
+
+
+    def check_localhost(self, url):
+        """
+        CHeck_localhost: Function which try automatically if it's possible scanning with "localhost" host for discovery other files/directories
+        """
+        list_test = ["127.0.0.1", "localhost"]
+        localhost = False
+        print("{}Try localhost host".format(INFO))
+        print(LINE)
+        for lt in list_test:
+            header = {"Host": lt}
+            req = requests.get(url, headers=header, verify=False, timeout=10)
+            if req.status_code == 200:
+                print("\t{}You can potentialy try bf directories with this option '-H \"Host:{}\"' ".format(PLUS, lt))
+                localhost = True
+            else:
+                pass
+        if localhost == False:
+            print("\t{}Not seem possible to scan with localhost host".format(LESS))
         print(LINE)
