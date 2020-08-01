@@ -17,19 +17,27 @@ class parsing_html:
         """
         Get_links: get all links on webpage during the scan
         """
-        soup = BeautifulSoup(req.text, "html.parser")
-        search = soup.find_all('a')
-        if search:
-            for s in search:
-                link = s.get("href")
-                try:
-                    if re.match(r'http(s)', link):
-                        with open(directory + "/links.txt", "a+") as links:
-                            links.write(str(link+"\n"))
-                    else:
+        if len(req.content) > 0:
+            #print("{}:{}".format(req, req.url)) #DEBUG
+            try:
+                req_text = req.text
+            except:
+                req_text = req.body()
+            soup = BeautifulSoup(req_text, "html.parser")
+            search = soup.find_all('a')
+            if search:
+                for s in search:
+                    link = s.get("href")
+                    try:
+                        if re.match(r'http(s)', link):
+                            with open(directory + "/links.txt", "a+") as links:
+                                links.write(str(link+"\n"))
+                        else:
+                            pass
+                    except:
                         pass
-                except:
-                    pass
+        else:
+            pass
 
 
     def search_s3(self, res, req, directory):
@@ -38,7 +46,10 @@ class parsing_html:
         """
         s3_keyword = ["S3://", "s3-", "amazonaws", "aws."]
         for s3_f in s3_keyword:
-            reqtext = req.text.split(" ")
+            try:
+                reqtext = req.text.split(" ")
+            except:
+                reqtext = req.body().split(" ")
             for req_key in reqtext:
                 req_value = req_key.split('"')
                 for r in req_value:
@@ -66,7 +77,10 @@ class parsing_html:
         Mail:
         get mail adresse in web page during the scan and check if the mail leaked
         """
-        mails = req.text
+        try:
+            mails = req.text
+        except:
+            mails = req.body()
         # for all @mail
         reg = re.compile(r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+")
         search = re.findall(reg, mails)
@@ -92,6 +106,10 @@ class parsing_html:
 
     def sitemap(self, req, directory):
         """Get sitemap.xml of website"""
-        soup = BeautifulSoup(req.text, "html.parser")
+        try:
+            req_text = req.text 
+        except:
+            req_text = req.body()
+        soup = BeautifulSoup(req_text, "html.parser")
         with open(directory + '/sitemap.xml', 'w+') as file:
             file.write(str(soup).replace(' ','\n'))

@@ -193,11 +193,14 @@ class mini_scans:
         print(LINE)
         for lt in list_test:
             header = {"Host": lt}
-            req = requests.get(url, headers=header, verify=False, timeout=10)
-            if req.status_code == 200:
-                print("\t{}You can potentialy try bf directories with this option '-H \"Host:{}\"' ".format(PLUS, lt))
-                localhost = True
-            else:
+            try:
+                req = requests.get(url, headers=header, verify=False, timeout=10)
+                if req.status_code == 200:
+                    print("\t{}You can potentialy try bf directories with this option '-H \"Host:{}\"' ".format(PLUS, lt))
+                    localhost = True
+                else:
+                    pass
+            except:
                 pass
         if localhost == False:
             print("\t{}Not seem possible to scan with localhost host".format(LESS))

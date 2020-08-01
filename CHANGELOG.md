@@ -1,11 +1,16 @@
 Changelog:
 ----------
 
+	- 1.3.5
+		Auto activate JS during scan if the webite is full JS (website 2.0)
+
+	- 1.3.4
+		Adding Dockerfile
+
 	- 1.3.3
 		Adding new function which try automatically if it's possible scanning with "localhost" host
 
 	- 1.3.2
-		Adding Dockerfile
 		Replace "--cookie" by "-H" for different header values; ex: -H "Host:test" // -H "Authentification:cookie" (not space after ":" or "=")
 
 	- 1.3.1:
