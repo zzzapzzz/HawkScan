@@ -47,6 +47,7 @@ FILE.htaccess
 filename.HTACCESS
 RoOt.hTaCcEsS
 .json
+jsnlog
 host.ashx
 pkginfo/
 phpserver/
@@ -477,6 +478,9 @@ modules/
 themes/
 backup/
 backup.sql
+hsqldb;
+hsqldb
+hsqldb%0a
 graphql/
 graphql/console/
 graphql.php

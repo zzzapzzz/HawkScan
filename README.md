@@ -11,9 +11,9 @@ This script use "Sublist3r" to scan subdomains (https://github.com/aboul3la/Subl
 This script use "waybacktool" to check in waybackmachine (https://github.com/Rhynorater/waybacktool)
 
 # News
-**!** Version 1.5      
-**!** Auto activate JS during scan if the webite is full JS (website 2.0)      
-**!** Adding Dockerfile         
+**!** Version 1.5.1      
+**!** New banner      
+**!** Fix bugs         
 
 # Features
  - [x] URL fuzzing and dir/file detection
@@ -55,6 +55,7 @@ This script use "waybacktool" to check in waybackmachine (https://github.com/Rhy
  - [ ] JS parsing and analysis [P1]
  - [ ] Analyse html code webpage [P1]
  - [ ] On-the-fly writing report [P1]
+ - [ ] Try differents bypass for 403 code error [P2]
  - [ ] Check HTTP headers/ssl security [P2]
  - [ ] Fuzzing amazonaws S3 Buckets [P2]
  - [ ] Anonymous routing through some proxy (http/s proxy list) [P2]
@@ -70,6 +71,9 @@ This script use "waybacktool" to check in waybackmachine (https://github.com/Rhy
        pip(3) install -r requirements.txt 
     If problem with pip3:    
        sudo python3 -m pip install -r requirements.txt
+
+    If you have problem to install the library "dryscrape" you can follow this link:
+       https://www.it-swarm.dev/fr/python/pip-install-dryscrape-echoue-avec-error-errno-2-ce-fichier-ou-repertoire-srcwebkit-server/827034588/
  > 
   
  >
@@ -102,19 +106,22 @@ This script use "waybacktool" to check in waybackmachine (https://github.com/Rhy
 
  >
     //Basic
-    python hawkscan.py -u https://www.exemple.com -w dico_extra.txt
+    python hawkscan.py -u https://www.exemple.com/
 
-    //With redirect
-    python hawkscan.py -u https://www.exemple.com -w dico_extra.txt -t 5 --redirect
+    //With specific dico
+    python hawkscan.py -u https://www.exemple.com/ -w dico_extra.txt
+
+    //with 30 threads
+    python hawkscan.py -u https://www.exemple.com/ -t 30
 
     //With backup files scan
-    python hawkscan.py -u https://www.exemple.com -w dico_extra.txt -t 5 -b
+    python hawkscan.py -u https://www.exemple.com/ -b
 
     //With an exclude page
-    python hawkscan.py -u https://www.exemple.com -w dico_extra.txt -t 5 --exclude https://www.exemple.com/profile.php?id=1
+    python hawkscan.py -u https://www.exemple.com/ --exclude https://www.exemple.com/profile.php?id=1
 
     //With an exclude response code
-     python hawkscan.py -u https://www.exemple.com -w dico_extra.txt -t 5 --exclude 403
+     python hawkscan.py -u https://www.exemple.com/ --exclude 403
 
  >
 

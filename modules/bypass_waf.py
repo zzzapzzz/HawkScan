@@ -25,7 +25,7 @@ def bypass_waf(req, res):
 	"Origin",
 	"Timing-Allow-Origin"
 	]
-	options = [website_ip, domain, "127.0.0.1", "*"]
+	options = [website_ip, domain, "127.0.0.1", "*", "8.8.8.8"]
 	for hb in header_base:
 		for o in options:
 			headers = {
@@ -37,7 +37,7 @@ def bypass_waf(req, res):
 				#print(vrfy)
 				if vrfy == False:
 					#win = True
-					print("{} You can potentially bypass the WAF rate limit with: {} !".format(INFO, headers))
+					print("{}You can potentially bypass the WAF rate limit with: \033[34m{}\033[0m !".format(INFO, headers))
 					return headers
 			except Exception:
 				traceback.print_exc()
@@ -50,7 +50,7 @@ def bypass_waf(req, res):
 			vrfy = verify_waf(req, res, headers, display)
 			if vrfy == False:
 				#win = True
-				print("{}You can potentially bypass the WAF rate limit with: {} !".format(INFO, headers))
+				print("{}You can potentially bypass the WAF rate limit with: \033[34m{}\033[0m !".format(INFO, headers))
 				return headers
 		except:
 			traceback.print_exc()

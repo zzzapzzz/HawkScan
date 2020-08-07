@@ -1,10 +1,14 @@
 Changelog:
 ----------
 
-	- 1.3.5
+	- 1.5.1
+		New banner
+		Fix bugs
+
+	- 1.5
 		Auto activate JS during scan if the webite is full JS (website 2.0)
 
-	- 1.3.4
+	- 1.4
 		Adding Dockerfile
 
 	- 1.3.3

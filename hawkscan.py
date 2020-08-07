@@ -40,6 +40,7 @@ from modules.manage_dir import manage_dir
  
 def banner():
     print("""
+\033[31m
   _    _                _     _____                 
  | |  | |              | |   / ____|                
  | |__| | __ ___      _| | _| (___   ___ __ _ _ __  
@@ -47,9 +48,7 @@ def banner():
  | |  | | (_| |\ V  V /|   < ____) | (_| (_| | | | |
  |_|  |_|\__,_| \_/\_/ |_|\_\_____/ \___\__,_|_| |_|
                                                     
-
-https://github.com/c0dejump/HawkScan
-\033[35mv1.3.3 \033[0m
+    v1.5.1                             By codejump \033[0m
 ___________________________________________________________________
     """)
 
@@ -125,8 +124,12 @@ class filterManager:
         """
         if req.status_code == req_p:
             pass
+        elif req.status_code == 403:
+            pass
+        elif req.status_code in [500, 400, 422, 423, 424, 425]:
+            print("{} {} {} ({} bytes) {} server error".format(WARNING, PLUS, res, len(req.content), req.status_code))
         else:
-            print("{} {} {} ({})".format(HOUR, PLUS, res, len(req.content)))
+            print("{} {} {} ({} bytes)".format(HOUR, PLUS, res, len(req.content)))
 
     def check_exclude_page(sef, req, res, directory, forbi, HOUR, size_bytes=False):
         """
@@ -154,13 +157,12 @@ class filterManager:
         elif perc > 50 and perc < 80:
             print("{} {} {} Potential exclude page {}%".format(HOUR, EXCL, res, perc))
         else:
-            if size_bytes:
-                print("{} {} {} ({} bytes)".format(HOUR, PLUS, res, size_bytes))
+            if req.status_code in [403, 401]:
+                pass
+            elif req.status_code in [500, 400, 422, 423, 424, 425]:
+                print("{} {} {} ({} bytes) {} server error".format(WARNING, PLUS, res, len(req.content), req.status_code))
             else:
-                if req.status_code in [403, 401]:
-                    pass
-                else:
-                    print("{} {} {} {}".format(HOUR, PLUS, res, len(req)))
+                print("{} {} {} ({} bytes)".format(HOUR, PLUS, res, len(req.content)))
             #check backup
             create_backup(res, directory, forbi)
             #output scan.txt
@@ -173,6 +175,7 @@ class filterManager:
                     result = "/".join(spl)
                     rec_list.append(result)
                     outpt(directory, res, stats=0)
+
 
 def auto_update():
     """
@@ -396,7 +399,6 @@ def outpt(directory, res, stats):
                 op.write(str("[+] " + res + "\n"))
 
 
-
 def file_backup(s, res, directory, forbi, HOUR, filterM):
     """
     file_backup:
@@ -404,10 +406,9 @@ def file_backup(s, res, directory, forbi, HOUR, filterM):
     """
     size_check = 0
 
-    ext_b = ['.key', '.log', '.ini', '.env', '.dat', '.conf', '.config', '.cgi', '.bok', '.bkf', '.action', 
-    '.save', '.old', '.NEW', '.backup', '.BAK', '.bak', '.bak1', '.zip', '.rar', '_old', '_backup', '_bak', 
-    '/..%3B/', '/%20../', "..;", "?stats=1", "authorize/", ".json", ".bkp", ".wml", ".xml", ".xsd", ".yml", ".lock", 
-    ".swp", ".db", ".atom"]
+    ext_b = ['.db', '.swp', '.yml', '.xsd', '.xml', '.wml', '.bkp', '..;', '.rar', '.zip', '.bak', '.BAK', '.NEW', '.old', 
+            '.bkf', '.bok', '.cgi', '.dat', '.ini', '.log', '.key', '.conf', '.env', '_bak', '_old', '.bak1', '.json', '.lock', 
+            '.save', '.atom', '%20../', '..%3B/', '.action', '_backup', '.backup', '.config', '?stats=1', 'authorize/']
     
     d_files = directory + "/files/"
     for exton in ext_b:
@@ -491,7 +492,7 @@ def file_backup(s, res, directory, forbi, HOUR, filterM):
                 else:
                     filterM.check_exclude_page(req_b, res_b, directory, forbi, HOUR)
             print("{}{} {}".format(HOUR, res_b, req_b.status_code))
-        #sys.stdout.write("\t\t\t\t\t {} \r".format(exton))
+        #sys.stdout.write(" \033[34m\t\t\t\t\t  | B: {} {}\033[0m\r".format(result, exton))
         #sys.stdout.flush()
 
 
@@ -622,11 +623,13 @@ def len_page_flush(len_p):
     else:
         return 100
 
+
 def active_js(res):
+    dryscrape.start_xvfb()
     session = dryscrape.Session()
     session.visit(res)
-    #sys.exit()
     return session
+
 
 def defined_connect(s, res, user_agent=False, header_parsed=False):
     allow_redirection = True if stat == 301 or stat == 302 or redirect else False
@@ -635,7 +638,8 @@ def defined_connect(s, res, user_agent=False, header_parsed=False):
             user_agent.update(header_parsed)
             req = s.get(res, headers=user_agent, allow_redirects=allow_redirection, verify=False, timeout=10)
             if "You need to enable JavaScript to run this app" in req.text or "JavaScript Required" in req.text or \
-            "without JavaScript enabled" in req.text or "This website requires JavaScript" in req.text:
+            "without JavaScript enabled" in req.text or "This website requires JavaScript" in req.text or \
+            "Please enable JavaScript" in req.text:
                 activeJS = active_js(res)
                 return activeJS
             else:
@@ -644,7 +648,8 @@ def defined_connect(s, res, user_agent=False, header_parsed=False):
             user_agent.update(header_parsed)
             req = s.get(res, headers=user_agent, allow_redirects=allow_redirection, verify=False, timeout=10)
             if "You need to enable JavaScript to run this app" in req.text or "JavaScript Required" in req.text or \
-            "without JavaScript enabled" in req.text or "This website requires JavaScript" in req.text:
+            "without JavaScript enabled" in req.text or "This website requires JavaScript" in req.text or \
+            "Please enable JavaScript" in req.text:
                 activeJS = active_js(res)
                 return activeJS
             else:
@@ -653,7 +658,8 @@ def defined_connect(s, res, user_agent=False, header_parsed=False):
         if redirect:
             req = s.get(res, headers=user_agent, allow_redirects=allow_redirection, verify=False, timeout=10)
             if "You need to enable JavaScript to run this app" in req.text or "JavaScript Required" in req.text or \
-            "without JavaScript enabled" in req.text or "This website requires JavaScript" in req.text:
+            "without JavaScript enabled" in req.text or "This website requires JavaScript" in req.text or \
+            "Please enable JavaScript" in req.text:
                 activeJS = active_js(res)
                 return activeJS
             else:
@@ -661,7 +667,8 @@ def defined_connect(s, res, user_agent=False, header_parsed=False):
         else:
             req = s.get(res, headers=user_agent, allow_redirects=allow_redirection, verify=False, timeout=10)
             if "You need to enable JavaScript to run this app" in req.text or "JavaScript Required" in req.text or \
-            "without JavaScript enabled" in req.text or "This website requires JavaScript" in req.text:
+            "without JavaScript enabled" in req.text or "This website requires JavaScript" in req.text or \
+            "Please enable JavaScript" in req.text:
                 activeJS = active_js(res)
                 return activeJS
             else:
@@ -698,7 +705,6 @@ def tryUrl(i, q, threads, manager=False, directory=False, forced=False, u_agent=
     - file_backup()
     - mail()
     """
-    dryscrape.start_xvfb()
     filterM = filterManager()
     s = requests.session()
     parsing = parsing_html()
