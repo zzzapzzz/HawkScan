@@ -15,7 +15,14 @@ def bypass_waf(req, res):
 	website_ip = socket.gethostbyname(domain) # take ip website
 	header_base = [
 	"X-Originating-IP", 
+	"X-Forwarded",
+	"Forwarded",
+	"Forwarded-For",
+	"Forwarded-For-IP",
+	"X-Forwarder-For",
 	"X-Forwarded-For",
+	"X-Forwarded-For-Original",
+	"X-Forwarded-By",
 	"X-Forwarded-Host",
 	"X-Remote-IP",
 	"X-Remote-Addr",
@@ -60,5 +67,5 @@ def bypass_waf(req, res):
 """if __name__ == '__main__':
 	req = "plop"
 	user_agent = False
-	res = "https://transferwise.com/"
+	res = ""
 	bypass_waf(req, res)""" #DEBUG

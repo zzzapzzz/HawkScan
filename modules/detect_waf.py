@@ -622,8 +622,9 @@ def verify_waf(req, res, headers, display=True):
         return True
     elif "Access Denied" in req_test.text or "access denied" in req_test.text or "Something went wrong" in req_test.text or \
     "we have detected malicious traffic" in req_test.text or "device from your location is sending large amounts of web requests" in req_test.text or \
-    "Sorry, there have been too many requests in a short time" in req_test.text and not forced:
-        if req_test.status_code == 401 or req_test.status_code == 403 and not forced:
+    "Sorry, there have been too many requests in a short time" in req_test.text or \
+    "Access denied due to a large number of requests" in req_test.text or "has detected an attack" in req_test.text and not forced:
+        if req_test.status_code == 401 or req_test.status_code == 403 or req_test.status_code == 430 and not forced:
             if display:
                 print("{}{} Unknown WAF detected : {} ".format(INFO, req_test.status_code, res))
             return True

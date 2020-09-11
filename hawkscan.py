@@ -37,6 +37,8 @@ from modules.parsing_html import parsing_html
 from modules.check_cms import check_cms
 from modules.bypass_waf import bypass_waf
 from modules.manage_dir import manage_dir
+from modules.bypass_forbidden import bypass_forbidden
+
  
 def banner():
     print("""
@@ -48,7 +50,7 @@ def banner():
  | |  | | (_| |\ V  V /|   < ____) | (_| (_| | | | |
  |_|  |_|\__,_| \_/\_/ |_|\_\_____/ \___\__,_|_| |_|
                                                     
-    v1.5.1                             By codejump \033[0m
+    v1.5.2                             By codejump \033[0m
 ___________________________________________________________________
     """)
 
@@ -127,7 +129,7 @@ class filterManager:
         elif req.status_code == 403:
             pass
         elif req.status_code in [500, 400, 422, 423, 424, 425]:
-            print("{} {} {} ({} bytes) {} server error".format(WARNING, PLUS, res, len(req.content), req.status_code))
+            print("{} {} {} ({} bytes) {} server error".format(HOUR, WARNING, res, len(req.content), req.status_code))
         else:
             print("{} {} {} ({} bytes)".format(HOUR, PLUS, res, len(req.content)))
 
@@ -160,7 +162,7 @@ class filterManager:
             if req.status_code in [403, 401]:
                 pass
             elif req.status_code in [500, 400, 422, 423, 424, 425]:
-                print("{} {} {} ({} bytes) {} server error".format(WARNING, PLUS, res, len(req.content), req.status_code))
+                print("{} {} {} ({} bytes) {} server error".format(HOUR, WARNING, res, len(req.content), req.status_code))
             else:
                 print("{} {} {} ({} bytes)".format(HOUR, PLUS, res, len(req.content)))
             #check backup
@@ -355,7 +357,7 @@ def dl(res, req, directory):
     if req_size > 1:
         soup = BeautifulSoup(req.text, "html.parser")
         extensions = ['.php', '.json', '.txt', '.html', '.jsp', '.xml', '.php', '.aspx', '.zip', '.old', '.bak', 
-        '.sql', '.js', '.asp', '.ini', '.rar', '.dat', '.log', '.backup', '.dll', '.save', '.BAK', '.inc', '.php?-s']
+        '.sql', '.js', '.asp', '.ini', '.rar', '.dat', '.log', '.backup', '.dll', '.save', '.BAK', '.inc', '.php?-s', 'md']
         d_files = directory + "/files/"
         if not os.path.exists(d_files):
             os.makedirs(d_files)
@@ -477,8 +479,9 @@ def file_backup(s, res, directory, forbi, HOUR, filterM):
                 else:
                     filterM.check_exclude_page(req_b, res_b, directory, forbi, HOUR) 
             else:
-                print("{}{}{}".format(HOUR, FORBI, res_b))
-                outpt(directory, res_b, 403)
+                pass
+                """print("{}{}{}".format(HOUR, FORBI, res_b))
+                outpt(directory, res_b, 403)"""
         elif req_b.status_code == 429:
             pass
         elif req_b_status == 406:
@@ -625,9 +628,13 @@ def len_page_flush(len_p):
 
 
 def active_js(res):
-    dryscrape.start_xvfb()
-    session = dryscrape.Session()
-    session.visit(res)
+    try:
+        session = dryscrape.Session()
+        session.visit(res)
+    except:
+        dryscrape.start_xvfb()
+        session = dryscrape.Session()
+        session.visit(res)
     return session
 
 
@@ -640,8 +647,10 @@ def defined_connect(s, res, user_agent=False, header_parsed=False):
             if "You need to enable JavaScript to run this app" in req.text or "JavaScript Required" in req.text or \
             "without JavaScript enabled" in req.text or "This website requires JavaScript" in req.text or \
             "Please enable JavaScript" in req.text:
-                activeJS = active_js(res)
-                return activeJS
+                #activeJS = active_js(res)
+                #print("[i] This URL need to active JS please check it: {}".format(res))
+                #return activeJS
+                pass
             else:
                 return req
         else:
@@ -650,8 +659,10 @@ def defined_connect(s, res, user_agent=False, header_parsed=False):
             if "You need to enable JavaScript to run this app" in req.text or "JavaScript Required" in req.text or \
             "without JavaScript enabled" in req.text or "This website requires JavaScript" in req.text or \
             "Please enable JavaScript" in req.text:
-                activeJS = active_js(res)
-                return activeJS
+                #activeJS = active_js(res)
+                #print("[i] This URL need to active JS please check it: {}".format(res))
+                #return activeJS
+                pass
             else:
                 return req
     else:
@@ -660,8 +671,10 @@ def defined_connect(s, res, user_agent=False, header_parsed=False):
             if "You need to enable JavaScript to run this app" in req.text or "JavaScript Required" in req.text or \
             "without JavaScript enabled" in req.text or "This website requires JavaScript" in req.text or \
             "Please enable JavaScript" in req.text:
-                activeJS = active_js(res)
-                return activeJS
+                #activeJS = active_js(res)
+                #print("[i] This URL need to active JS please check it: {}".format(res))
+                #return activeJS
+                pass
             else:
                 return req
         else:
@@ -669,8 +682,10 @@ def defined_connect(s, res, user_agent=False, header_parsed=False):
             if "You need to enable JavaScript to run this app" in req.text or "JavaScript Required" in req.text or \
             "without JavaScript enabled" in req.text or "This website requires JavaScript" in req.text or \
             "Please enable JavaScript" in req.text:
-                activeJS = active_js(res)
-                return activeJS
+                #activeJS = active_js(res)
+                #print("[i] This URL need to active JS please check it: {}".format(res))
+                #return activeJS
+                pass
             else:
                 #print(req.text)
                 return req
@@ -754,8 +769,9 @@ def tryUrl(i, q, threads, manager=False, directory=False, forced=False, u_agent=
                     for r in req.text.split("\n"):
                         print("\t- {}".format(r))
 
-                waf = verify_waf(req, res, user_agent)
-                #verfiy_waf function, to check if waf detected, True: detected # False: not detected
+                if not forced:
+                    waf = verify_waf(req, res, user_agent)
+                    #verfiy_waf function, to check if waf detected, True: detected # False: not detected
 
                 if waf == True:
                     if tested_bypass == False:
@@ -834,6 +850,7 @@ def tryUrl(i, q, threads, manager=False, directory=False, forced=False, u_agent=
                     if type(req_p) == int:
                         filterM.check_exclude_code(HOUR, res, req)
                     else:
+                        bypass_forbidden(res)
                         if res[-1] == "/" and recur:
                             if ".htaccess" in res or ".htpasswd" in res or ".git" in res or "wp" in res:
                                 outpt(directory, res, stats=403)
@@ -852,8 +869,8 @@ def tryUrl(i, q, threads, manager=False, directory=False, forced=False, u_agent=
                         elif not forced and recur:
                             pass
                         else:
-                            #print("{}{} {} \033[31m Forbidden \033[0m".format(HOUR, FORBI, res))
-                            pass
+                            print("{}{} {} \033[31m Forbidden \033[0m".format(HOUR, FORBI, res))
+                            #pass
                 elif status_link == 404:
                     pass
                 elif status_link == 405:
@@ -1050,12 +1067,12 @@ def create_file(r, url, stat, u_agent, thread, subdomains):
         direct = url.split('.')
         director = direct[1]
         dire = "{}.{}".format(direct[1], direct[2].replace("/",""))
-        directory = "sites/" + director
+        directory = "sites/" + dire
     else:
         direct = url.split('/')
         director = direct[2]
         dire = director
-        directory = "sites/" + director
+        directory = "sites/" + dire
     # if the directory don't exist, create it
     if not os.path.exists(directory):
         os.makedirs(directory) # creat the dir

@@ -1,5 +1,8 @@
 Changelog:
 ----------
+	- 1.5.2
+		Try differents bypass for 403 code error
+		Update dico.txt
 
 	- 1.5.1
 		New banner
