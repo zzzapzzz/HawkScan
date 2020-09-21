@@ -509,7 +509,6 @@ server.cert
 ca.kru
 etcd-events.log
 kube-scheduler.log
-http://node-role.kubernetes.io
 kube-apiserver.log
 basic_auth.csv
 config.source
@@ -773,6 +772,11 @@ W3SVC2/
 W3SVC3/
 WEB-INF/
 WEB-INF/lib/
+WEB-INF/bin/
+WEB-INF/web.xml
+WEB-INF/lucee/
+WEB-INF/classes/
+WEB-INF/weblogic.xml
 META-INF/
 Windows/
 X/
@@ -11047,6 +11051,8 @@ public_html/.well-known/
 .well-known/core
 .well-known/csvm
 .well-known/dnt
+.well-known/dnt-policy.txt
+.well-known/change-password/
 .well-known/host-meta
 .well-known/host-meta.json
 .well-known/matrix
@@ -11065,6 +11071,8 @@ public_html/.well-known/
 .well-known/jmap
 .well-known/.DS_Store
 .well-known/autoconfig/
+.well-known/sshfp
+.well-known/mta-sts.txt
 wp-content/plugins/
 wp-content/plugins/w3tc
 wp-content/plugins/count-per-day/js/yc/d00.php

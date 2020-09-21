@@ -13,7 +13,10 @@ import traceback
 from requests.exceptions import Timeout
 
 # external modules
-import dryscrape
+if "Linux" in "{}".format(os.popen('cat /etc/services').read()):
+    import dryscrape
+else:
+    print("{} webengine for MacOs coming soon".format(INFO))
 from config import PLUS, WARNING, INFO, LESS, LINE, FORBI, BACK, EXCL
 try:
     from Queue import Queue
@@ -646,7 +649,7 @@ def defined_connect(s, res, user_agent=False, header_parsed=False):
             req = s.get(res, headers=user_agent, allow_redirects=allow_redirection, verify=False, timeout=10)
             if "You need to enable JavaScript to run this app" in req.text or "JavaScript Required" in req.text or \
             "without JavaScript enabled" in req.text or "This website requires JavaScript" in req.text or \
-            "Please enable JavaScript" in req.text:
+            "Please enable JavaScript" in req.text or "Loading" in req.text:
                 #activeJS = active_js(res)
                 #print("[i] This URL need to active JS please check it: {}".format(res))
                 #return activeJS
@@ -658,7 +661,7 @@ def defined_connect(s, res, user_agent=False, header_parsed=False):
             req = s.get(res, headers=user_agent, allow_redirects=allow_redirection, verify=False, timeout=10)
             if "You need to enable JavaScript to run this app" in req.text or "JavaScript Required" in req.text or \
             "without JavaScript enabled" in req.text or "This website requires JavaScript" in req.text or \
-            "Please enable JavaScript" in req.text:
+            "Please enable JavaScript" in req.text or "Loading" in req.text:
                 #activeJS = active_js(res)
                 #print("[i] This URL need to active JS please check it: {}".format(res))
                 #return activeJS
@@ -670,7 +673,7 @@ def defined_connect(s, res, user_agent=False, header_parsed=False):
             req = s.get(res, headers=user_agent, allow_redirects=allow_redirection, verify=False, timeout=10)
             if "You need to enable JavaScript to run this app" in req.text or "JavaScript Required" in req.text or \
             "without JavaScript enabled" in req.text or "This website requires JavaScript" in req.text or \
-            "Please enable JavaScript" in req.text:
+            "Please enable JavaScript" in req.text or "Loading" in req.text:
                 #activeJS = active_js(res)
                 #print("[i] This URL need to active JS please check it: {}".format(res))
                 #return activeJS
@@ -681,7 +684,7 @@ def defined_connect(s, res, user_agent=False, header_parsed=False):
             req = s.get(res, headers=user_agent, allow_redirects=allow_redirection, verify=False, timeout=10)
             if "You need to enable JavaScript to run this app" in req.text or "JavaScript Required" in req.text or \
             "without JavaScript enabled" in req.text or "This website requires JavaScript" in req.text or \
-            "Please enable JavaScript" in req.text:
+            "Please enable JavaScript" in req.text or "Loading" in req.text:
                 #activeJS = active_js(res)
                 #print("[i] This URL need to active JS please check it: {}".format(res))
                 #return activeJS

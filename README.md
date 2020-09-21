@@ -67,7 +67,8 @@ This script use "waybacktool" to check in waybackmachine (https://github.com/Rhy
  
  # Usage
  > 
- 
+       ./setup.sh
+
        pip(3) install -r requirements.txt 
     If problem with pip3:    
        sudo python3 -m pip install -r requirements.txt

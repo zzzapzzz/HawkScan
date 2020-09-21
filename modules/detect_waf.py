@@ -146,7 +146,7 @@ def verify_waf(req, res, headers, display=True):
             print("{}Cloudbric WAF detected : {} ".format(INFO, res))
         return True
     #Cloudflare
-    elif "Cloudflare Ray ID:" in req_test.text:
+    elif "Cloudflare Ray ID:" in req_test.text or "Attention Required! | Cloudflare" in req_test.text:
         if display:
             print("{}Cloudflare WAF detected : {} ".format(INFO, res))
         return True
