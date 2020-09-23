@@ -5925,6 +5925,7 @@ admin/adminLogin.php
 admin/backup/
 admin/backups/
 admin/config.php
+admin/config
 administrator/webconfig.txt.php
 admin/controlpanel
 admin/controlpanel.%EXT%
@@ -8440,6 +8441,8 @@ inadmin
 inc
 inc-admin
 inc/config.inc
+inc/config.asp
+/inc/config.asp
 inc/fckeditor
 inc/fckeditor/
 inc/tiny_mce
@@ -9106,6 +9109,7 @@ module/tiny_mce
 module/tinymce
 modules
 modules/admin/
+modules/columnadverts/uploadimage.php
 modules/TinyMCE/TinyMCEModuleInfo.%EXT%
 modules/web.config
 modules_admin
@@ -11073,6 +11077,10 @@ public_html/.well-known/
 .well-known/autoconfig/
 .well-known/sshfp
 .well-known/mta-sts.txt
+pf-ws/authn/flows/
+pf-ws/authn/
+pf-ws/
+pf-ws/rest/sessionMgmt
 wp-content/plugins/
 wp-content/plugins/w3tc
 wp-content/plugins/count-per-day/js/yc/d00.php

@@ -872,7 +872,7 @@ def tryUrl(i, q, threads, manager=False, directory=False, forced=False, u_agent=
                         elif not forced and recur:
                             pass
                         else:
-                            print("{}{} {} \033[31m Forbidden \033[0m".format(HOUR, FORBI, res))
+                            print("{} {} {} \033[31m Forbidden \033[0m".format(HOUR, FORBI, res))
                             #pass
                 elif status_link == 404:
                     pass
@@ -1172,6 +1172,9 @@ if __name__ == '__main__':
     auto = results.auto
     update = results.update
 
+    if len(sys.argv) < 2:
+        print("{} URL target is missing, try using -u <url> or -h for help".format(INFO))
+        sys.exit()
     banner()
     if update:
         auto_update()
