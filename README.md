@@ -11,9 +11,8 @@ This script use "Sublist3r" to scan subdomains (https://github.com/aboul3la/Subl
 This script use "waybacktool" to check in waybackmachine (https://github.com/Rhynorater/waybacktool)
 
 # News
-**!** Version 1.5.2      
-**!** Try differents bypass for 403 code error      
-**!** Update dico.txt         
+**!** Version 1.5.3     
+**!** Add setup.py                 
 
 # Features
  - [x] URL fuzzing and dir/file detection
@@ -56,6 +55,7 @@ This script use "waybacktool" to check in waybackmachine (https://github.com/Rhy
  - [ ] JS parsing and analysis [P1]
  - [ ] Analyse html code webpage [P1]
  - [ ] On-the-fly writing report [P1]
+ - [ ] Google Dork [P2]
  - [ ] Webengine for MacOS [P2]
  - [ ] Check HTTP headers/ssl security [P2]
  - [ ] Fuzzing amazonaws S3 Buckets [P2]

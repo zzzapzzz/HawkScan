@@ -65,7 +65,7 @@ class parsing_html:
                                     else:
                                         try:
                                             req_s3 = requests.get(r, verify=False)
-                                            if req_s3.status_code == 200:
+                                            if req_s3.status_code == 200 and ["jpg","png","jpeg"] in [r]:
                                                 print("{} Potentialy s3 buckets found with reponse 200: {}".format(S3, r))
                                                 read_links.write(r)
                                         except:

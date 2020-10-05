@@ -1,6 +1,7 @@
 requests
 pyopenssl
-pprint
+prettyprinter
+prettyprint
 queuelib
 fake_useragent
 python-whois

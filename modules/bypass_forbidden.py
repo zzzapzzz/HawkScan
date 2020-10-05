@@ -10,7 +10,7 @@ def original_url(res, page, url):
 	}
 	req = requests.get(res, verify=False, headers=header)
 	if req.status_code not in [403, 401, 404, 429, 301, 302, 400, 408, 503]:
-		print("{}[{}] {} Forbidden Bypass with: 'X-Originating-URL: {}'".format(BYP, req.status_code, url, page))
+		print("{}[{}] {} Forbidden Bypass with: 'X-Originating-URL: {}'".format(BYP, req.status_code, url+page, page))
 
 
 def IP_authorization(res, url):
@@ -19,7 +19,7 @@ def IP_authorization(res, url):
 	}
 	req = requests.get(res, verify=False, headers=header)
 	if req.status_code not in [403, 401, 404, 429, 301, 302, 400, 408, 503]:
-		print("{}[{}] {} Forbidden Bypass with: 'X-Originating-URL: {}'".format(BYP, req.status_code, url, page))
+		print("{}[{}] {} Forbidden Bypass with: 'X-Originating-URL: {}'".format(BYP, req.status_code, url+page, page))
 
 
 def other_bypass(url, page):

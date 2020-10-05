@@ -14,6 +14,7 @@ koolix
 admin/
 sign-in
 admin.php
+1.txt
 index.php
 index.php?-s
 index.html
@@ -21,8 +22,10 @@ index/
 _clockwork
 __clockwork
 ;index.jsp
+../index.js
 ?static=1&order=asc
 static../.git/config
+static../config.js
 contact/
 contact.php
 include.php
@@ -1866,6 +1869,9 @@ disc/
 disclaimer/
 disclosure/
 discovery/
+autodiscover/autodiscover.xml
+autodiscover/
+autodiscover.xml
 discuss/
 discussion/
 diseno/
@@ -4552,6 +4558,7 @@ txt/
 tyler/
 u/
 wp-cs-dump
+mwp_db
 wp-ver-info
 wp-html-rend
 servlet/file/file.jsp
@@ -7773,6 +7780,7 @@ db1.sqlite
 db2
 db_admin
 db_backups/
+db_dump.sql
 dbaccess.log
 dbadmin
 dbadmin.php
@@ -9352,8 +9360,10 @@ p.php
 p/m/a/
 p_/webdav/xmltools/minidom/xml/sax/saxutils/os/popen2?cmd=dir
 package
+package/
 package.json
 package/static-resource-server
+package/script-manager
 static-resource-server
 padmin
 page
@@ -13419,6 +13429,7 @@ ups_currency.tpl
 ups_av_notice.tpl
 upload.py
 upload.cgi
+update_db_get_auto.php
 update_to_FINAL.php
 update_backlink.php
 unsubscribe.php
