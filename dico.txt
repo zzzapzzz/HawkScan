@@ -7825,6 +7825,7 @@ details
 dev
 dev.php
 dev/
+DEV/
 devel
 developer
 developers
@@ -8119,6 +8120,7 @@ FCKeditor21/
 FCKeditor22/
 FCKeditor23/
 FCKeditor24/
+on/demandware.servlet/webdav/
 features
 feed
 feedback
@@ -11033,8 +11035,13 @@ WLDummyInitJVMIDs
 Wordpress/
 WordPress/
 WP
+wp-admin/maint/
+wp-admin/maint/repair.php
 wp-admin/c99.php
 wp-admin/install.php
+wp-admin/install.php?step=2
+wp-admin/install.php?step=1
+wp-admin/install-helper.php
 wp-admin/setup-config.php
 wp-app.log
 app.log

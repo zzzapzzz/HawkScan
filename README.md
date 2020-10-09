@@ -11,8 +11,9 @@ This script use "Sublist3r" to scan subdomains (https://github.com/aboul3la/Subl
 This script use "waybacktool" to check in waybackmachine (https://github.com/Rhynorater/waybacktool)
 
 # News
-**!** Version 1.5.3     
-**!** Add setup.py                 
+**!** Version 1.5.4     
+**!** Delete "dryscrape" librarie for the moment, many error with it, I'll remake it later
+**!** Add option "--js" for scan and analyse js         
 
 # Features
  - [x] URL fuzzing and dir/file detection
@@ -46,29 +47,29 @@ This script use "waybacktool" to check in waybackmachine (https://github.com/Rhy
  - [x] Testing bypass of waf if detected
  - [x] Testing if it's possible scanning with "localhost" host
  - [x] Dockerfile
- - [x] Active JavaScript on website 2.0 (full js)
  - [x] Try differents bypass for 403 code error
+ - [x] JS parsing and analysis
  
 # TODO 
 **P1 is the most important**
 
- - [ ] JS parsing and analysis [P1]
- - [ ] Analyse html code webpage [P1]
  - [ ] On-the-fly writing report [P1]
- - [ ] Google Dork [P2]
- - [ ] Webengine for MacOS [P2]
+ - [ ] Google Dork [P1]
  - [ ] Check HTTP headers/ssl security [P2]
  - [ ] Fuzzing amazonaws S3 Buckets [P2]
  - [ ] Anonymous routing through some proxy (http/s proxy list) [P2]
  - [ ] Check pastebin [P2]
  - [ ] Access token [P2]
- - [ ] Check source code and verify leak or sentsitive data in the Github [P2]
+ - [ ] Check source code and verify leak or sensitive data in the Github [P2]
+ - [ ] Analyse html code webpage [P3] => really necessary?
  - [ ] Check phpmyadmin version [P3]
  - [ ] Scan API endpoints/informations leaks [ASAP]
+ - [ ] Active JS on website 2.0 (full js) + Webengine for MacOS [ASAP]
  
- # Usage
+ # Installation
  > 
-       python setup.py
+
+       git clone https://github.com/c0dejump/HawkScan.git && sudo python HawkScan/setup.py
 
        pip(3) install -r requirements.txt 
     If problem with pip3:    

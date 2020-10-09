@@ -1,7 +1,11 @@
 Changelog:
 ----------
+	- 1.5.4
+		Add option "--js" for scan and analyse JS
+		Delete "dryscrape" librarie for the moment, many error with it, I'll remake it later
+
 	- 1.5.3
-		- Add setup.py
+		Add setup.py
 
 	- 1.5.2
 		Try differents bypass for 403 code error
