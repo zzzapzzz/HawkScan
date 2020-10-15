@@ -143,7 +143,7 @@ class mini_scans:
             Some DBs may just return null
             '''
             print("{} null return".format(INFO))
-        print(LINE + "\n")
+        print(LINE)
         
 
     def wayback_check(self, url, directory):
