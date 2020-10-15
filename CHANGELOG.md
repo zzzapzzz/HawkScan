@@ -1,5 +1,8 @@
 Changelog:
 ----------
+	- 1.5.5
+		Add google dork requests
+
 	- 1.5.4
 		Add option "--js" for scan and analyse JS
 		Delete "dryscrape" librarie for the moment, many error with it, I'll remake it later

@@ -11,9 +11,8 @@ This script use "Sublist3r" to scan subdomains (https://github.com/aboul3la/Subl
 This script use "waybacktool" to check in waybackmachine (https://github.com/Rhynorater/waybacktool)
 
 # News
-**!** Version 1.5.4     
-**!** Delete "dryscrape" librarie for the moment, many error with it, I'll remake it later
-**!** Add option "--js" for scan and analyse js         
+**!** Version 1.5.5     
+**!** Add Google Dork requests         
 
 # Features
  - [x] URL fuzzing and dir/file detection
@@ -49,12 +48,13 @@ This script use "waybacktool" to check in waybackmachine (https://github.com/Rhy
  - [x] Dockerfile
  - [x] Try differents bypass for 403 code error
  - [x] JS parsing and analysis
+ - [x] Google Dork 
  
 # TODO 
 **P1 is the most important**
 
  - [ ] On-the-fly writing report [P1]
- - [ ] Google Dork [P1]
+ - [ ] Prefix filename (old_, copy of...) [P1]
  - [ ] Check HTTP headers/ssl security [P2]
  - [ ] Fuzzing amazonaws S3 Buckets [P2]
  - [ ] Anonymous routing through some proxy (http/s proxy list) [P2]
@@ -75,13 +75,11 @@ This script use "waybacktool" to check in waybackmachine (https://github.com/Rhy
     If problem with pip3:    
        sudo python3 -m pip install -r requirements.txt
 
-    If you have problem to install the library "dryscrape" you can follow this link:
-       https://www.it-swarm.dev/fr/python/pip-install-dryscrape-echoue-avec-error-errno-2-ce-fichier-ou-repertoire-srcwebkit-server/827034588/
  > 
   
  >
      
-    usage: hawkscan.py [-h] [-u URL] [-w WORDLIST] [-s SUBDOMAINS] [-t THREAD] [-a USER_AGENT] [--redirect] [-r] [-p PREFIX] [-o OUTPUT] [--cookie COOKIE_] [--exclude EXCLUDE] [--timesleep TS] [--auto]
+    usage: hawkscan.py [-h] [-u URL] [-w WORDLIST] [-s SUBDOMAINS] [-t THREAD] [-a USER_AGENT] [--redirect] [-r] [-p PREFIX] [-o OUTPUT] [--cookie COOKIE_] [--exclude EXCLUDE] [--timesleep TS] [--auto] [--js]
  
  > 
  
@@ -102,6 +100,7 @@ This script use "waybacktool" to check in waybackmachine (https://github.com/Rhy
      --timesleep TS     To define a timesleep/rate-limit if app is unstable during scan                                 
      --auto             Automatic threads depending response to website. Max: 30      
      --update           For automatic update
+     --js               For try to found keys or token in the javascript page  
 
  >
 

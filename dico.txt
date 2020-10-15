@@ -4506,6 +4506,7 @@ trademarks/
 traffic/
 trails/
 rails/
+rails/info/properties
 training/
 trans/
 transactions/
@@ -6789,6 +6790,7 @@ team-planning/all
 team-planning/complete-data
 export/planning
 export/target
+mint/
 planning/needs
 temporary-employee/search
 temporary-employee/save
@@ -6909,6 +6911,7 @@ app/config/databases.yml
 app/config/global.json
 app/config/parameters.ini
 app/config/parameters.yml
+config/parameters.yml
 app/config/routes.cfg
 app/config/schema.yml
 app/dev
@@ -7047,6 +7050,9 @@ awstats
 awstats.conf
 awstats.pl
 awstats/
+awstats
+awstats.old/cgi-bin/awstats.pl
+webstats/awstats.pl
 axis2
 axis1/axis1-admin/
 axis2/axis2-admin/
@@ -7416,6 +7422,7 @@ clear
 click
 client
 client_admin
+check_network_status.txt
 ClientAccessPolicy.xml
 clientaccesspolicy.xml
 clientadmin
@@ -7860,6 +7867,7 @@ doc/en/changes.html
 doc/stable.version
 docker-compose-dev.yml
 docker-compose.yml
+docker-composer.yml
 Dockerfile
 docs
 docs/CHANGELOG.html
@@ -9644,6 +9652,7 @@ phpmyadmin-old
 phpMyAdmin.%EXT%
 phpmyAdmin/
 phpMyadmin/
+phpmyadmin/main.php
 phpmyadmin/scripts/setup.php
 phpMyAdmin/scripts/setup.php
 phpMyAdmin0/
@@ -9698,6 +9707,7 @@ PlantsByWebSphere/docs
 platz_login/
 player.swf
 plesk-stat
+plesk-stat/webstat/awstats.pl
 pls
 pls/dad/null
 plugins
@@ -10958,6 +10968,8 @@ WEB-INF/web.xml
 ./WEB-INF/web.xml
 .//WEB-INF/web.xml
 WEB-INF/classes
+WEB-INF/classes/1/4/1.class
+WEB-INF/applicationContext.xml
 web.7z
 Web.config
 web.config.bak

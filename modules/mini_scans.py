@@ -11,6 +11,7 @@ import traceback
 from config import PLUS, WARNING, INFO, LESS, LINE, FORBI, BACK
 
 class mini_scans:
+    
 
     def get_header(self, url, directory):
         """Get header of website (cookie, link, etc...)"""

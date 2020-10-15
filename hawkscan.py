@@ -37,6 +37,7 @@ from modules.check_cms import check_cms
 from modules.bypass_waf import bypass_waf
 from modules.manage_dir import manage_dir
 from modules.bypass_forbidden import bypass_forbidden
+from modules.google_dorks import query_dork
 
  
 def banner():
@@ -49,7 +50,7 @@ def banner():
  | |  | | (_| |\ V  V /|   < ____) | (_| (_| | | | |
  |_|  |_|\__,_| \_/\_/ |_|\_\_____/ \___\__,_|_| |_|
                                                     
-    v1.5.2                             By codejump \033[0m
+    v1.5.5                             By codejump \033[0m
 ___________________________________________________________________
     """)
 
@@ -409,9 +410,9 @@ def file_backup(s, res, directory, forbi, HOUR, parsing, filterM):
     """
     size_check = 0
 
-    ext_b = ['.db', '.swp', '.yml', '.xsd', '.xml', '.wml', '.bkp', '..;', '.rar', '.zip', '.bak', '.BAK', '.NEW', '.old', 
+    ext_b = ['.db', '.swp', '.yml', '.xsd', '.xml', '.wml', '.bkp', '..;', '.rar', '.zip', '.bak', '.bac', '.BAK', '.NEW', '.old', 
             '.bkf', '.bok', '.cgi', '.dat', '.ini', '.log', '.key', '.conf', '.env', '_bak', '_old', '.bak1', '.json', '.lock', 
-            '.save', '.atom', '%20../', '..%3B/', '.action', '_backup', '.backup', '.config', '?stats=1', 'authorize/', '.md']
+            '.save', '.atom', '%20../', '..%3B/', '.action', '_backup', '.backup', '.config', '?stats=1', 'authorize/', '.md', '.gz']
     
     d_files = directory + "/files/"
     for exton in ext_b:
@@ -783,14 +784,9 @@ def tryUrl(i, q, threads, manager=False, directory=False, forced=False, u_agent=
                         status_link = req.status_code 
                     except:
                         status_link = req.status_code()
-                try:
-                    redirect_link = req.url 
-                    redirect_stat = req.status_code
-                    len_req = len(req.content)
-                except:
-                    redirect_link = req.url()
-                    redirect_stat = req.status_code()
-                    len_req = len(req.body())
+                redirect_link = req.url 
+                redirect_stat = req.status_code
+                len_req = len(req.content)
 
                 #print(status_link) #DEBUG status response
                 if status_link == 200:
@@ -830,7 +826,7 @@ def tryUrl(i, q, threads, manager=False, directory=False, forced=False, u_agent=
                     if 'sitemap.xml' in res:
                         parsing.sitemap(req, directory)
                     parsing.search_s3(res, req, directory)
-                elif status_link == 403:
+                elif status_link in [403, 401]:
                     #pass
                     if type(req_p) == int:
                         filterM.check_exclude_code(HOUR, res, req)
@@ -849,14 +845,14 @@ def tryUrl(i, q, threads, manager=False, directory=False, forced=False, u_agent=
                             #report.create_report_url(status_link, res, directory)
                         if not forced:
                             forbi = True
-                            print("{} {} {} \033[31m Forbidden \033[0m".format(HOUR, FORBI, res))
+                            print("{} {} {} ({} bytes) \033[31m Forbidden \033[0m".format(HOUR, FORBI, res, len_req))
                             create_backup(res, directory, forbi)
                             outpt(directory, res, stats=403)
                             #report.create_report_url(status_link, res, directory)
                         elif not forced and recur:
                             pass
                         else:
-                            print("{} {} {} \033[31m Forbidden \033[0m".format(HOUR, FORBI, res))
+                            print("{} {} {} ({} bytes) \033[31m Forbidden \033[0m".format(HOUR, FORBI, res, len_req))
                             #pass
                 elif status_link == 404:
                     pass
@@ -921,10 +917,6 @@ def tryUrl(i, q, threads, manager=False, directory=False, forced=False, u_agent=
                 elif status_link == 422 or status_link == 423 or status_link == 424 or status_link == 425:
                     print("{} {} {} \033[33mError WebDAV\033[0m".format(HOUR, LESS, res))
                     #report.create_report_url(status_link, res, directory)
-                elif status_link == 401:
-                    """print("{} {} {} \033[33m401 Unauthorized\033[0m".format(HOUR,LESS, res))
-                    outpt(directory, res, stats=401)"""
-                    pass
                 elif status_link == 405:
                     print("{} {} {}".format(HOUR, PLUS, res))
                     outpt(directory, res, stats=405)
@@ -1077,6 +1069,7 @@ def create_file(r, url, stat, u_agent, thread, subdomains):
         miniScan.wayback_check(dire, directory)
         miniScan.gitpast(url)
         miniScan.firebaseio(url)
+        query_dork(url)
         miniScan.check_localhost(url)
         status(r, stat, directory, u_agent, thread, manageDir)
         scan_error(directory, forbi)

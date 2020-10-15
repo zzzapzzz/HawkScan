@@ -113,6 +113,7 @@ class parsing_html:
         soup = BeautifulSoup(req_text, "html.parser")
         with open(directory + '/sitemap.xml', 'w+') as file:
             file.write(str(soup).replace(' ','\n'))
+            
 
     def get_javascript(self, url, req):
         """search potentialy sensitive keyword in javascript"""

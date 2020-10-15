@@ -10,7 +10,7 @@ def original_url(res, page, url):
 	"X-Originating-URL": page
 	}
 	req = requests.get(res, verify=False, headers=header, allow_redirects=False)
-	if req.status_code not in [403, 401, 404, 429, 301, 302, 400, 408, 503, 405, 428]:
+	if req.status_code not in [403, 401, 404, 429, 301, 302, 400, 408, 503, 405, 428, 412]:
 		print("{}[{}] {} Forbidden Bypass with: 'X-Originating-URL: {}'".format(BYP, req.status_code, url+page, page))
 
 
@@ -20,7 +20,7 @@ def IP_authorization(res, url):
 	"X-Custom-IP-Authorization": "127.0.0.1"
 	}
 	req = requests.get(res, verify=False, headers=header, allow_redirects=False)
-	if req.status_code not in [403, 401, 404, 429, 301, 302, 400, 408, 503, 405, 428]:
+	if req.status_code not in [403, 401, 404, 429, 301, 302, 400, 408, 503, 405, 428, 412]:
 		print("{}[{}] {} Forbidden Bypass with: 'X-Originating-URL: {}'".format(BYP, req.status_code, url+page, page))
 
 
@@ -29,7 +29,7 @@ def other_bypass(url, page):
 	for p in payl:
 		url_b = url + p
 		req = requests.get(url_b, verify=False)
-		if req.status_code not in [403, 401, 404, 429, 301, 302, 400, 408, 503, 405, 428]:
+		if req.status_code not in [403, 401, 404, 429, 301, 302, 400, 408, 503, 405, 428, 412]:
 			print("{}[{}] Forbidden Bypass with: {}".format(BYP, req.status_code, url_b))
 		elif req.status_code in [302, 301]:
 			if 200 in req.history:

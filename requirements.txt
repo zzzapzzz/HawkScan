@@ -11,4 +11,4 @@ dnspython
 wafw00f
 python-whois
 sockets
-urllib
+google
