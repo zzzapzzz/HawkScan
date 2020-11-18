@@ -19,10 +19,7 @@ class parsing_html:
         """
         if len(req.content) > 0:
             #print("{}:{}".format(req, req.url)) #DEBUG
-            try:
-                req_text = req.text
-            except:
-                req_text = req.body()
+            req_text = req.text
             soup = BeautifulSoup(req_text, "html.parser")
             search = soup.find_all('a')
             if search:
@@ -77,10 +74,7 @@ class parsing_html:
         Mail:
         get mail adresse in web page during the scan and check if the mail leaked
         """
-        try:
-            mails = req.text
-        except:
-            mails = req.body()
+        mails = req.text
         # for all @mail
         reg = re.compile(r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+")
         search = re.findall(reg, mails)
@@ -101,16 +95,12 @@ class parsing_html:
             if all_mail is not None and all_mail != []:
                 writer = csv.writer(file)
                 for r in all_mail:
-                    r = r.split(":")
-                    writer.writerow(r)
+                    writer.writerow(r.split(":"))
+
 
     def sitemap(self, req, directory):
         """Get sitemap.xml of website"""
-        try:
-            req_text = req.text 
-        except:
-            req_text = req.body()
-        soup = BeautifulSoup(req_text, "html.parser")
+        soup = BeautifulSoup(req.text, "html.parser")
         with open(directory + '/sitemap.xml', 'w+') as file:
             file.write(str(soup).replace(' ','\n'))
             
@@ -133,32 +123,39 @@ class parsing_html:
             "json_web_token":r"ey[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$",
             "SSH_privKey":r"([-]+BEGIN [^\s]+ PRIVATE KEY[-]+[\s]*[^-]*[-]+END [^\s]+ PRIVATE KEY[-]+)",
         }
-        url = url.split("/")[0:3]
-        url = "/".join(url)
+
+        url_index = url.split("/")[0:3]
+        url_index = "/".join(url_index)
         UNINTERESTING_EXTENSIONS = ['css', 'svg', 'png', 'jpeg', 'jpg', 'mp4', 'gif']
         UNINTERESTING_JS_FILES = ['bootstrap', 'jquery']
         """
         'api:', 'api=', 'apis:', 'apis=', 'token=', 'token:', 'key:', 'key=', 'keys:', 'keys=', 'password=', "password:"
          => interesting ? false positive ?
         """
-        INTERESTING_KEY = ['ApiKey', '_public_key', '_TOKEN', '_PASSWORD', '_DATABASE', 'SECRET_KEY', 'client_secret', '_secret', '_session', 'api_key']
+        INTERESTING_KEY = ['ApiKey', 'appKey', '_public_key', '_TOKEN', '_PASSWORD', '_DATABASE', 
+        'SECRET_KEY', 'client_secret', '_secret', '_session', 'api_key', 'APPKey']
         text = req.content.decode('utf-8')
         regex = r'''((https?:)?[/]{1,2}[^'\"> ]{5,})|(\.(get|post|ajax|load)\s*\(\s*['\"](https?:)?[/]{1,2}[^'\"> ]{5,})'''
-        sourcemap_file = r'//#\ssourceMappingURL=(.*)'
-        matches = re.findall(regex, text)
-        for match in matches:
-            #print(match[0]) #DEBUG
-            if not any('{}'.format(ext) in match[0] for ext in UNINTERESTING_EXTENSIONS) and url in match[0] and ".js" in match[0]:
-                req_js = requests.get(match[0], verify=False)
-                for keyword_match in INTERESTING_KEY:
-                    if keyword_match in req_js.text:
-                        print("{}Potentialy keyword found \033[33m[{}] \033[0min {}".format(JS, keyword_match, match[0]))
+        if ".js" in url:
+            for keyword_match in INTERESTING_KEY:
+                if keyword_match in text:
+                    print("{}Potentialy keyword found \033[33m[{}] \033[0min {}".format(JS, keyword_match, url))
+        else:
+            matches = re.findall(regex, text)
+            for match in matches:
+                #print(match[0]) #DEBUG
+                if not any('{}'.format(ext) in match[0] for ext in UNINTERESTING_EXTENSIONS) and url_index in match[0] and ".js" in match[0]:
+                    req_js = requests.get(match[0], verify=False)
+                    #print(match[0]) #DEBUG
+                    for keyword_match in INTERESTING_KEY:
+                        if keyword_match in req_js.text:
+                            print("{}Potentialy keyword found \033[33m[{}] \033[0min {}".format(JS, keyword_match, match[0]))
         for k, v in REGEX_.items():
             values_found = re.findall(v, text)
             if values_found:
-                print(values_found)
                 for v in values_found:
-                    print(v)
+                    print("{} keyword found \033[33m[{}] \033[0min {} with value [{}]".format(JS, k, url, v))
+
 
                         
 """if __name__ == '__main__':

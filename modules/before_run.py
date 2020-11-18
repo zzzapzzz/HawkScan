@@ -16,10 +16,9 @@ class mini_scans:
     def get_header(self, url, directory):
         """Get header of website (cookie, link, etc...)"""
         r = requests.get(url, allow_redirects=False, verify=False)
-        head = r.headers
         print(INFO + "HEADER")
         print(LINE)
-        print("  {} \n".format(head).replace(',','\n'))
+        print("  {} \n".format(r.headers).replace(',','\n'))
         print(LINE)
         with open(directory + '/header.csv', 'w+') as file:
             file.write(str(head).replace(',','\n'))
@@ -32,10 +31,7 @@ class mini_scans:
         """
         print("{}Check in Github".format(INFO))
         print(LINE)
-        if "www" in url:
-            url = url.split(".")[1]
-        else:
-            url = url.split("/")[2]
+        url = url.split(".")[1] if "www" in url else url.split("/")[2]
         url = "{}".format(url)
         print("search: {}\n".format(url))
         types = ["Commits", "Issues", "Code", "Repositories", "Marketplace", "Topics", "Wikis", "Users"]
@@ -117,10 +113,7 @@ class mini_scans:
         get_domain = url.split("/")[2]
         parse_domain = get_domain.split(".")
         if not "www" in get_domain:
-            if len(parse_domain) > 2:
-                dire = "{}-{}".format(parse_domain[0], parse_domain[1])
-            else:
-                dire = "{}".format(parse_domain[0])
+            dire = "{}-{}".format(parse_domain[0], parse_domain[1]) if len(parse_domain) > 2 else "{}".format(parse_domain[0])
         else:
             dire = "{}".format(parse_domain[1])
         print("{}Firebaseio Check".format(INFO))
@@ -203,6 +196,31 @@ class mini_scans:
                     pass
             except:
                 pass
-        if localhost == False:
+        if not localhost:
             print("\t{}Not seem possible to scan with localhost host".format(LESS))
+        print(LINE)
+
+
+    def check_ip(self, domain, url):
+        """
+        check_ip:
+        Check the host ip if this webpage is different or not
+        """
+        print("{}Check Host IP".format(INFO))
+        print(LINE)
+        req_index = requests.get(url, verify=False)
+        len_index = len(req_index.content)
+        retrieve_ip = False
+        dom = socket.gethostbyname(domain)
+        ips = ["https://{}/".format(dom), "http://{}/".format(dom)]
+        for ip in ips:
+            try:
+                req_ip = requests.get(ip, verify=False)
+                if req_ip.status_code not in [404, 403, 425] and len(req_ip.content) != len_index:
+                    retrieve_ip = True
+                    print("\t{}The host IP seem to be different, check it: {} ".format(PLUS, ip))
+            except:
+                pass
+        if not retrieve_ip:
+            print("\t{}Not seem possible to scan with the ip host".format(LESS))
         print(LINE)

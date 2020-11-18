@@ -2,6 +2,8 @@
 *
 :
 ?wsdl
+ws
+ws/
 ..%3B/
 ..;/
 ..;/manager/html
@@ -9,9 +11,11 @@
 ;/..;/manager
 %3F.jsp
 robots.txt
+maint.html
 koolix/
 koolix
 admin/
+adfs/
 sign-in
 admin.php
 1.txt
@@ -68,6 +72,9 @@ coordonneesp.html
 project_error.log
 project_access.log
 SymfonyRequirements.php
+_fragment
+_profiler
+_profiler/phpinfo
 framework.php
 blog.sqlite
 services.php
@@ -3803,6 +3810,7 @@ reseller/
 resellers/
 resource/
 resources/
+resources/portal.properties
 respaldo/
 responder/
 restricted/
@@ -7235,6 +7243,7 @@ boardadmin
 book
 books
 Bootstrap
+bootstrap.properties
 borat
 bot.txt
 bower.json
@@ -11106,6 +11115,7 @@ public_html/.well-known/
 .well-known/autoconfig/
 .well-known/sshfp
 .well-known/mta-sts.txt
+keybase.txt
 pf-ws/authn/flows/
 pf-ws/authn/
 pf-ws/
@@ -12331,6 +12341,7 @@ product_info.php
 preview.xsl
 preferences.php
 portal.php
+portal.properties
 popup_product.tpl
 popup_product.js
 popup_info.tpl

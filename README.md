@@ -11,50 +11,41 @@ This script use "Sublist3r" to scan subdomains (https://github.com/aboul3la/Subl
 This script use "waybacktool" to check in waybackmachine (https://github.com/Rhynorater/waybacktool)
 
 # News
-**!** Version 1.5.5     
-**!** Add Google Dork requests         
+**!** Fix bugs   
+**!** Start: Code optimization
+**!** Update: file and directory function management
+**!** Add: New exclude type, exclude byte number (--exclude 1337b)
+**!** Add: Function to try if the website IP is different of the website domain
+*(for more details go on CHANGELOG.md)*
 
-# Features
- - [x] URL fuzzing and dir/file detection
+# Special features
  - [x] Test backup/old file on all the files found (index.php.bak, index.php~ ...)
  - [x] Check header information
  - [x] Check DNS information
  - [x] Check whois information
- - [x] User-agent random or personal
- - [x] Extract files
- - [x] Keep a trace of the scan
- - [x] Check @mail in the website and check if @mails leaked
+ - [x] Check email in the website and in same time if emails leaked (report)
  - [x] CMS detection + version and vulns
- - [x] Subdomain Checker
  - [x] Backup system (if the script stopped, it take again in same place)
- - [x] WAF detection
- - [x] Add personal prefix
- - [x] Auto update script
- - [x] Auto or personal output of scan (scan.txt)
+ - [x] WAF detection and Response error to WAF + Testing bypass it
  - [x] Check Github
- - [x] Recursif dir/file
- - [x] Scan with an authenfication cookie
- - [x] Option --profil to pass profil page during the scan
- - [x] HTML report
+ - [x] Option --exclude to exclude page, code error, bytes
  - [x] Work it with py2 and py3
- - [x] Add option rate-limit if app is unstable (--timesleep)
+ - [x] Option rate-limit if app is unstable (--timesleep)
  - [x] Check in waybackmachine
- - [x] Response error to WAF
  - [x] Check if DataBase firebaseio existe and accessible
- - [x] Automatic threads depending response to website (and reconfig if WAF detected too many times). Max: 30
  - [x] Search S3 buckets in source code page
- - [x] Testing bypass of waf if detected
  - [x] Testing if it's possible scanning with "localhost" host
- - [x] Dockerfile
  - [x] Try differents bypass for 403 code error
  - [x] JS parsing and analysis
  - [x] Google Dork 
+ - [x] Check Host IP
  
 # TODO 
 **P1 is the most important**
 
  - [ ] On-the-fly writing report [P1]
  - [ ] Prefix filename (old_, copy of...) [P1]
+ - [ ] Auto resize relative to window [P2]
  - [ ] Check HTTP headers/ssl security [P2]
  - [ ] Fuzzing amazonaws S3 Buckets [P2]
  - [ ] Anonymous routing through some proxy (http/s proxy list) [P2]
@@ -108,29 +99,33 @@ This script use "waybacktool" to check in waybackmachine (https://github.com/Rhy
 
  >
     //Basic
-    python hawkscan.py -u https://www.exemple.com/
+     python hawkscan.py -u https://www.exemple.com/
 
     //With specific dico
-    python hawkscan.py -u https://www.exemple.com/ -w dico_extra.txt
+     python hawkscan.py -u https://www.exemple.com/ -w dico_extra.txt
 
     //with 30 threads
-    python hawkscan.py -u https://www.exemple.com/ -t 30
+     python hawkscan.py -u https://www.exemple.com/ -t 30
 
     //With backup files scan
-    python hawkscan.py -u https://www.exemple.com/ -b
+     python hawkscan.py -u https://www.exemple.com/ -b
 
     //With an exclude page
-    python hawkscan.py -u https://www.exemple.com/ --exclude https://www.exemple.com/profile.php?id=1
+     python hawkscan.py -u https://www.exemple.com/ --exclude https://www.exemple.com/profile.php?id=1
 
     //With an exclude response code
      python hawkscan.py -u https://www.exemple.com/ --exclude 403
 
+    //With an exclude bytes number
+     python hawkscan.py -u https://www.exemple.com/ --exclude 1337b 
+
  >
 
 # Thanks
-Layno (https://github.com/Clayno/)      
-Sanguinarius (https://twitter.com/sanguinarius_Bt)        
-Cyber_Ph4ntoM (https://twitter.com/__PH4NTOM__ )  
+Layno (https://github.com/Clayno/) [Technical helper]      
+Sanguinarius (https://twitter.com/sanguinarius_Bt) [Technical helper]         
+Cyber_Ph4ntoM (https://twitter.com/__PH4NTOM__) [Beta tester]
+
 
 # Paypal
 
