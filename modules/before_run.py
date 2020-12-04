@@ -7,10 +7,11 @@ import ssl, OpenSSL
 import socket
 import pprint
 import traceback
+from requests.exceptions import Timeout
 # External
 from config import PLUS, WARNING, INFO, LESS, LINE, FORBI, BACK
 
-class mini_scans:
+class mini_checks:
     
 
     def get_header(self, url, directory):
@@ -21,7 +22,7 @@ class mini_scans:
         print("  {} \n".format(r.headers).replace(',','\n'))
         print(LINE)
         with open(directory + '/header.csv', 'w+') as file:
-            file.write(str(head).replace(',','\n'))
+            file.write(str(r.headers).replace(',','\n'))
 
 
     def gitpast(self, url):
@@ -216,11 +217,24 @@ class mini_scans:
         for ip in ips:
             try:
                 req_ip = requests.get(ip, verify=False)
-                if req_ip.status_code not in [404, 403, 425] and len(req_ip.content) != len_index:
+                if req_ip.status_code not in [404, 403, 425, 503, 500, 400] and len(req_ip.content) != len_index:
                     retrieve_ip = True
                     print("\t{}The host IP seem to be different, check it: {} ".format(PLUS, ip))
             except:
                 pass
         if not retrieve_ip:
-            print("\t{}Not seem possible to scan with the ip host".format(LESS))
+            print("\t{}The IP Not seem different host".format(LESS))
         print(LINE)
+
+
+    def test_timeout(self, url):
+        """
+        Test_timeout: just a little function for test if the connection is good or not
+        """
+        try:
+            req_timeout = requests.get(url, timeout=30)
+        except Timeout:
+            print("{}Service potentialy Unavailable, The site web seem unavailable please wait...\n".format(WARNING))
+            time.sleep(180)
+        except requests.exceptions.ConnectionError:
+            pass

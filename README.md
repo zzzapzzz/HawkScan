@@ -4,19 +4,24 @@
 
 Security Tool for Reconnaissance and Information Gathering on a website. (python 2.x & 3.x)
 
-This script use "WafW00f" to detect the WAF in the first step (https://github.com/EnableSecurity/wafw00f)
-
-This script use "Sublist3r" to scan subdomains (https://github.com/aboul3la/Sublist3r)
-
-This script use "waybacktool" to check in waybackmachine (https://github.com/Rhynorater/waybacktool)
-
 # News
-**!** Fix bugs   
-**!** Start: Code optimization
-**!** Update: file and directory function management
-**!** Add: New exclude type, exclude byte number (--exclude 1337b)
-**!** Add: Function to try if the website IP is different of the website domain
+**!** Fix bugs       
+**!** Start: Code optimization       
+**!** Update: file and directory function management     
+**!** Add: New exclude type, exclude byte number (--exclude 1337b)    
+**!** Add: Function to try if the website IP is different of the website domain    
 *(for more details go on CHANGELOG.md)*
+
+# Installation
+ > 
+
+       git clone https://github.com/c0dejump/HawkScan.git && sudo python HawkScan/setup.py
+
+       pip(3) install -r requirements.txt 
+    If problem with pip3:    
+       sudo python3 -m pip install -r requirements.txt
+
+ > 
 
 # Special features
  - [x] Test backup/old file on all the files found (index.php.bak, index.php~ ...)
@@ -45,28 +50,17 @@ This script use "waybacktool" to check in waybackmachine (https://github.com/Rhy
 
  - [ ] On-the-fly writing report [P1]
  - [ ] Prefix filename (old_, copy of...) [P1]
- - [ ] Auto resize relative to window [P2]
+ - [ ] Multiple website scanning [P2]
  - [ ] Check HTTP headers/ssl security [P2]
  - [ ] Fuzzing amazonaws S3 Buckets [P2]
  - [ ] Anonymous routing through some proxy (http/s proxy list) [P2]
- - [ ] Check pastebin [P2]
  - [ ] Access token [P2]
  - [ ] Check source code and verify leak or sensitive data in the Github [P2]
+ - [ ] Auto resize relative to window [P2]
  - [ ] Analyse html code webpage [P3] => really necessary?
  - [ ] Check phpmyadmin version [P3]
  - [ ] Scan API endpoints/informations leaks [ASAP]
  - [ ] Active JS on website 2.0 (full js) + Webengine for MacOS [ASAP]
- 
- # Installation
- > 
-
-       git clone https://github.com/c0dejump/HawkScan.git && sudo python HawkScan/setup.py
-
-       pip(3) install -r requirements.txt 
-    If problem with pip3:    
-       sudo python3 -m pip install -r requirements.txt
-
- > 
   
  >
      
@@ -131,3 +125,10 @@ Cyber_Ph4ntoM (https://twitter.com/__PH4NTOM__) [Beta tester]
 
 https://www.paypal.me/c0dejump
 
+## Tools used
+
+This script use "WafW00f" to detect the WAF in the first step (https://github.com/EnableSecurity/wafw00f)
+
+This script use "Sublist3r" to scan subdomains (https://github.com/aboul3la/Sublist3r)
+
+This script use "waybacktool" to check in waybackmachine (https://github.com/Rhynorater/waybacktool)

@@ -154,7 +154,7 @@ class parsing_html:
             values_found = re.findall(v, text)
             if values_found:
                 for v in values_found:
-                    print("{} keyword found \033[33m[{}] \033[0min {} with value [{}]".format(JS, k, url, v))
+                    print("{} keyword found \033[33m[{}] \033[0min {} with value \033[32m[{}] \033[0".format(JS, k, url, v))
 
 
                         

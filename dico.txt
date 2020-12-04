@@ -15,6 +15,7 @@ maint.html
 koolix/
 koolix
 admin/
+adinfo
 adfs/
 sign-in
 admin.php
@@ -181,6 +182,9 @@ config.public.php
 secure_notes/
 groups.xml
 wp-config.php
+db-config.php
+wp-staging-config.php
+wp-local-config.php
 wp-config.zip
 wp-mail.php
 wp-load.php
@@ -485,6 +489,7 @@ apixmlrpc.php
 user_upload/
 functions.inc.php
 THXData/
+datasafe
 config/
 accueil/
 usercontrols/
@@ -509,6 +514,10 @@ ww2/
 www_app/
 ajaxpackagesave
 audit.log
+info.php
+info_omniview.php
+info.txt
+infos.php
 config.hash
 apiserver-key.pem
 cni-conf.json
@@ -546,6 +555,7 @@ graphiql.php
 backup_old
 _db_.sql.zip
 old/
+old-versions/
 .old
 users/
 login/
@@ -700,8 +710,11 @@ Legal/
 Links/
 Linux/
 Log/
+hotlog/
 Login/
 Logs/
+logs/
+logs/java.log
 vi-logs/
 application/logs/
 application/logs
@@ -1093,6 +1106,7 @@ babylon5/
 bacchus/
 bach/
 back/
+backissues/
 back-up/
 backdoor/
 backend/
@@ -1100,6 +1114,7 @@ back_office/
 back_office/dashboard/
 back_office/uploader/
 background/
+backgrounds/
 backoffice/
 backups/
 badass/
@@ -1226,6 +1241,7 @@ blog/
 blogger/
 bloggers/
 blogs/
+blogsql/
 blonde/
 blondie/
 blow/
@@ -1243,7 +1259,6 @@ body/
 bolsa/
 bond007/
 bonjour/
-bonnie/
 booboo/
 booger/
 boogie/
@@ -1419,7 +1434,6 @@ cdrom/
 cecily/
 cedic/
 celica/
-celine/
 celler/
 celtics/
 center/
@@ -1430,6 +1444,8 @@ cercador/
 cert/
 certenroll/
 certificate/
+ssl-certificate
+ssl-certificate/
 certificates/
 certification/
 certs/
@@ -1440,6 +1456,7 @@ cfg/
 cfi/
 cfj/
 cgi/
+scgi-bin/
 cgi-bin/
 cgi-bin/config.exp
 cgi-bin/cfsearch.cgi
@@ -1454,6 +1471,7 @@ cgibin/
 cgis/
 cgj/
 ch/
+iqweb/
 saml/
 saml
 challenge/
@@ -1496,14 +1514,9 @@ chico/
 china/
 chip/
 chiquita/
-chloe/
 chocolat/
 chris/
 chris1/
-christia/
-christin/
-christina/
-christine/
 christop/
 christy/
 chuck/
@@ -1845,6 +1858,7 @@ development/
 device/
 devices/
 devs/
+dc-sql/
 devtools/
 dexter/
 dgj/
@@ -2141,6 +2155,7 @@ fiction/
 fidelity/
 field/
 file/
+$file
 fileadmin/
 filelist/
 files/
@@ -2539,6 +2554,7 @@ idbc/
 identity/
 idiot/
 ie/
+dmca/
 sitemap.xml.gz
 splunkd/__raw/services/server/info/server-info?output_mode=json
 en-US/splunkd/__raw/services/server/info/server-info?output_mode=json
@@ -2555,6 +2571,7 @@ node_modules/webpack-dev-server/
 iguana/
 iis/
 iisadmin/
+regulamin
 iisadmpwd/
 iissamples/
 ikusi/
@@ -2577,9 +2594,11 @@ in/
 inbox/
 inc/
 include/
+icom_includes/
 includes/
 incoming/
 incs/
+featuresIndex
 index1/
 index2/
 index3/
@@ -2639,20 +2658,13 @@ invitados/
 invitation/
 invite/
 ip/
+iptables
+iptables/
 ipod/
 ipp/
 ips/
 iraq/
 irc/
-ireland/
-irene/
-irish/
-irishman/
-ironman/
-isaac/
-isabelle/
-isis/
-island/
 issue/
 issues/
 it/
@@ -2661,28 +2673,9 @@ italia/
 italy/
 item/
 items/
-izquierda/
 j/
 ja/
 ja_JP/
-jack/
-jackie/
-jackson/
-jacob/
-jaguar/
-jake/
-jamaica/
-james/
-james1/
-jan/
-jane/
-janet/
-janice/
-janie/
-japan/
-jared/
-jasmin/
-jasmine/
 jason/
 jason1/
 jasper/
@@ -2692,22 +2685,6 @@ javascript/
 jazz/
 jdbc/
 jean/
-jeanette/
-jeanne/
-jeff/
-jeffrey/
-jen/
-jenifer/
-jenni/
-jennifer/
-jenny/
-jenny1/
-jensen/
-jeremy/
-jerry/
-jessica/
-jessie/
-jester/
 jesus/
 jesus1/
 jewels/
@@ -2716,8 +2693,6 @@ jim/
 jimbo/
 jixian/
 jkm/
-joanna/
-joanne/
 job/
 jobs/
 jocs/
@@ -2727,13 +2702,9 @@ joel/
 joey/
 john/
 john316/
-johnny/
-johnson/
 join/
 jojo/
 joker/
-jonathan/
-jordan/
 jordan23/
 joseph/
 josh/
@@ -2752,22 +2723,10 @@ jsp-examples/
 jsp2/
 jsps/
 jsr/
-judith/
-judy/
-juego/
-juegos/
-juggle/
-julia/
-julian/
-julie/
-julie1/
 jump/
 june/
 junior/
 jupiter/
-justice/
-justin/
-justin1/
 k/
 karen/
 karie/
@@ -2803,7 +2762,6 @@ khan/
 kids/
 killer/
 kim/
-kimberly/
 king/
 kingdom/
 kingfish/
@@ -2811,7 +2769,6 @@ kirkland/
 kitten/
 kitten12/
 kitty/
-kleenex/
 knicks/
 knight/
 ko/
@@ -2820,13 +2777,6 @@ koala/
 koko/
 kontakt/
 kramer/
-krista/
-kristen/
-kristi/
-kristie/
-kristin/
-kristine/
-kristy/
 l/
 lab/
 labs/
@@ -2857,9 +2807,6 @@ latest/
 latest/meta-data/
 launch/
 launchpage/
-laura/
-lauren/
-laurie/
 law/
 layout/
 layouts/
@@ -2876,10 +2823,7 @@ legal/
 legend/
 legislation/
 leland/
-leon/
-leonard/
 leroy/
-leslie/
 lestat/
 letmein/
 letras/
@@ -2999,6 +2943,7 @@ magnum/
 mailbox/
 mailer/
 mailinglist/
+mailinglists/
 maillist/
 mailman/
 main/
@@ -3136,6 +3081,8 @@ mirror/
 mirrors/
 misc/
 miscellaneous/
+miscellaneous_files/
+miscellaneous_files20/
 misha/
 mishka/
 mission/
@@ -3161,9 +3108,8 @@ monday/
 monet/
 money/
 money1/
-monica/
-monique/
 monitor/
+monitors/
 monkey/
 monopoly/
 montana/
@@ -3223,14 +3169,10 @@ n/
 nada/
 nagel/
 names/
-nancy/
-naomi/
-napoleon/
 nasa/
+NASApp/
 nascar/
 nat/
-natasha/
-nathan/
 national/
 nautica/
 nav/
@@ -3332,15 +3274,14 @@ office/
 ogl/
 oldie/
 olive/
-oliver/
 olivetti/
-olivia/
-olivier/
 olvidado/
 on/
 one/
 online/
 open/
+openssh/
+openssh
 openapp/
 openbsd/
 openfile/
@@ -3361,6 +3302,7 @@ orca/
 orchid/
 order/
 orders/
+orderstatus/
 org/
 organitzacions/
 organizacion/
@@ -3425,8 +3367,6 @@ pat/
 patches/
 patents/
 path/
-patricia/
-patrick/
 patty/
 paul/
 paula/
@@ -3474,10 +3414,11 @@ petey/
 petunia/
 peu/
 pgp/
+pgpkey
+pgpkey/
 pgsql/
 phantom/
 phil/
-philip/
 phish/
 phishing/
 phoenix/
@@ -3627,6 +3568,7 @@ processform/
 prod/
 producers/
 product/
+productdirectory/
 product_info/
 production/
 products/
@@ -4079,6 +4021,7 @@ sistemes/
 site/
 site-map/
 site_map/
+site_index/
 sitemap/
 sites/
 sitio/
@@ -4118,6 +4061,14 @@ snowman/
 snp/
 snuffy/
 soap/
+soap/server.php
+soap/lib/
+soap/data.php
+soap/old/
+soap/soap-client.php
+soap/soap-request.xml
+soap/soap-server.php
+soap/samples/
 soapdocs/
 soccer/
 soccer1/
@@ -4298,6 +4249,7 @@ svn/
 svn/RV3D/
 svr/
 sw/
+queries/
 metrics/
 heapdump/
 swearer/
@@ -4313,9 +4265,12 @@ symbol/
 symmetry/
 syndication/
 sys/
+sysfail-ftp
 sysadmin/
 system/
 system_web/
+webhosting
+web-hosting
 web.config
 MacroScripts/web.config
 views/web.config
@@ -4326,6 +4281,7 @@ config/dashboard.config
 web.xml
 env-config.js
 env-config
+xmlui/
 t/
 t-bone/
 t1/
@@ -4453,6 +4409,7 @@ toc/
 todas/
 today/
 todo/
+ToDo.html
 todos/
 toggle/
 tom/
@@ -4504,6 +4461,8 @@ trabajadores/
 trabajo/
 trace/
 traceroute/
+nph-traceroute/
+nph-traceroute
 traci/
 tracie/
 track/
@@ -4517,6 +4476,7 @@ rails/
 rails/info/properties
 training/
 trans/
+transaction/
 transactions/
 transfer/
 transformations/
@@ -4536,12 +4496,6 @@ tree/
 trees/
 trek/
 trevor/
-tricia/
-trident/
-trisha/
-tristan/
-trivial/
-trixie/
 trombone/
 trouble/
 truck/
@@ -4589,8 +4543,10 @@ update.php
 updateinstaller/
 updates/
 upgrade/
+UPGRADING/
 uploader/
 uploads/
+WPupload/
 uranus/
 urchin/
 url/
@@ -5392,6 +5348,10 @@ wp-content/uploads/dump.sql
 0admin/
 0manager/
 1
+dot.htaccess
+backup.htaccess
+_.htaccess
+-.htaccess
 1.htaccess
 1.htpasswd
 1.php
@@ -6973,6 +6933,7 @@ apps
 apps/frontend/config/app.yml
 apps/frontend/config/databases.yml
 AppServer
+archiv~1
 archive
 archive.rar
 archive.sql
@@ -7230,6 +7191,9 @@ blog/wp-login.php
 blog_admin
 blogadmin
 blogindex/
+siteindex/
+siteindex
+siteinfo
 blog/_wpeprivate/config.json
 wpeprivate/config.json
 blogs
@@ -7336,6 +7300,7 @@ CFIDE/Administrator/startstop.html
 CFIDE/scripts/ajax/FCKeditor
 cgi
 cgi-admin
+cgi-revenge
 cgi-bin
 CGI-BIN/
 perl-bin/
@@ -7413,6 +7378,8 @@ citydesk.xml
 cjadmin
 ckeditor
 ckeditor/
+ckeditor/ckeditor.asp
+ckeditor/_source/
 ckeditor/ckfinder/ckfinder.html
 ckeditor/ckfinder/core/connector/asp/connector.asp
 ckeditor/ckfinder/core/connector/aspx/connector.aspx
@@ -7485,6 +7452,7 @@ command.php
 comment
 comment-admin.%EXT%
 comments
+common~1
 common
 common.inc
 common.xml
@@ -7867,6 +7835,8 @@ discus_admin
 discus_admin_40
 display
 dist/
+dist/ws/soap/
+dist/ws/
 django_lfc.egg-info/vPKG-INFO
 dl
 dlgadmin
@@ -7905,6 +7875,7 @@ domcfg.nsf/?open
 domostroy.admin
 donate
 dot
+dotnet
 down
 down/login
 Download
@@ -8273,6 +8244,7 @@ globes_admin/
 glossary
 glpi
 glpi/
+glpi/files/
 go
 google
 grabbed.html
@@ -8561,9 +8533,6 @@ info
 info.%EXT%
 info.json
 pimple.json
-info.php
-info.txt
-infos.php
 ini
 instadmin/
 INSTALL
@@ -8752,6 +8721,8 @@ libraries/tiny_mce/
 libraries/tinymce
 libraries/tinymce/
 library
+phpadsnew
+wplibrary
 Library
 libs
 LICENSE
@@ -8871,6 +8842,7 @@ login.shtml
 Login.shtml
 login.srf
 fw.sh
+fwconfig
 login/admin/
 login/admin/admin.asp
 login/administrator/
@@ -9145,6 +9117,7 @@ monitoring/
 moodle
 moodle/
 more
+moreinfo
 movies
 moving.page
 mp3
@@ -9325,6 +9298,7 @@ opc/services/OrderTrackingIntfPort/wsdl/
 opc/services/PurchaseOrderIntfPort
 opc/services/PurchaseOrderIntfPort/wsdl/
 openadmin
+OpenPGP/
 openvpnadmin/
 operador/
 opinion
@@ -9384,6 +9358,7 @@ package.json
 package/static-resource-server
 package/script-manager
 static-resource-server
+source-code
 padmin
 page
 pages
@@ -9516,6 +9491,7 @@ php_error_log
 php_errorlog
 php_errors.log
 php_my_admin
+my_weblog
 phpadmin
 phpadmin/
 phpadminmy/
@@ -9527,6 +9503,7 @@ phpinfo.%EXT%
 PhpInfo.%EXT%
 PHPinfo.%EXT%
 PHPINFO.%EXT%
+pressmatic-phpinfo.php
 phpinfo.php
 phpinfo.php3
 phpinfo.php4
@@ -9830,6 +9807,7 @@ psquare/x.jsp
 PSUser/
 ptadmin
 pub
+usenet
 public
 Public/
 public_html
@@ -10001,10 +9979,12 @@ scripts/fpcount.exe
 scripts/iisadmin/ism.dll?http/dir
 scripts/no-such-file.pl
 scripts/root.exe?/c+dir
+scripts/samples
 scripts/samples/search/webhits.exe
 scripts/setup.php
 scripts/tiny_mce
 scripts/tinymce
+scripts/tools/
 scripts/tools/getdrvs.exe
 scripts/tools/newdsn.exe
 sdzxadmin
@@ -10120,6 +10100,7 @@ sftp-config.json
 Sh3ll.php
 share
 shared
+shared-hosting
 sharedadmin
 shell
 shell.php
@@ -10382,6 +10363,7 @@ styles/prosilver/style.cfg
 sub-login/
 subadmin
 submit
+SubmitFiles
 submit_article.%EXT%
 subscribe
 subscribe.html
@@ -10468,6 +10450,7 @@ sysadmins
 sysadmins/
 sysbackup
 syslog/
+syslog-ng
 sysstat/
 system
 system-administration/
@@ -10602,6 +10585,7 @@ thanks.%EXT%
 ThankYou.%EXT%
 theme
 themes
+_themes
 themes/default/htdocs/flash/ZeroClipboard.swf
 thirdparty/fckeditor
 Thorfile
@@ -10851,6 +10835,7 @@ var/log/apache/error_log
 var/log/apache/error.log
 var/log/apache-ssl/access.log
 var/log/apache-ssl/error.log
+apache-ssl
 var/log/auth.log
 var/log/boot
 var/htmp
@@ -10894,6 +10879,7 @@ var/log/mysql/mysql-bin.log
 var/log/mysql/mysql.log
 var/log/mysql/mysql-slow.log
 var/log/proftpd
+proftpdmodtls
 var/log/pureftpd.log
 var/log/pure-ftpd/pure-ftpd.log
 var/log/secure
@@ -10903,6 +10889,7 @@ var/log/xferlog
 var/log/yum.log
 var/mysql.log
 var/run/utmp
+vftpd
 var/spool/cron/crontabs/root
 var/webmin/miniserv.log
 var/www/log/access_log
@@ -10967,6 +10954,7 @@ WarehouseWeb/
 WarehouseWebservlet
 WarehouseWebservlet/
 wcx_ftp.ini
+web-cgi
 web-console/
 web-console/Invoker
 web-console/ServerInfo.jsp
@@ -10979,6 +10967,7 @@ WEB-INF/web.xml
 WEB-INF/classes
 WEB-INF/classes/1/4/1.class
 WEB-INF/applicationContext.xml
+winrar
 web.7z
 Web.config
 web.config.bak
@@ -11023,10 +11012,12 @@ webmaster.php
 webmin/
 WebResource.axd?d=LER8t9aS
 WebService
+webservices/
 WebServiceServlet
 WebServicesSamples/docs/
 WebSer~1
 WebShell.cgi
+websites
 website.git
 WebSphere
 WebSphereBank
@@ -11066,6 +11057,7 @@ wp-admin/install-helper.php
 wp-admin/setup-config.php
 wp-app.log
 app.log
+wp-config-local.php
 wp-config.%EXT%
 wp-config.inc
 wp-config.old
@@ -11121,6 +11113,7 @@ pf-ws/authn/
 pf-ws/
 pf-ws/rest/sessionMgmt
 wp-content/plugins/
+wp-content/mysql.sql
 wp-content/plugins/w3tc
 wp-content/plugins/count-per-day/js/yc/d00.php
 wp-content/plugins/disqus-comment-system/disqus.php
@@ -11380,6 +11373,8 @@ giftcert.tpl
 geshi.php
 general.tpl
 event.php
+eventlog
+eventlogs
 embed.js
 LICENSES.php
 INSTALL.php
@@ -11501,6 +11496,7 @@ server_info.php
 ru_RU.php
 pasteword.js
 packingslip.php
+nav_status
 orders_status.php
 none.php
 newsletters.php
@@ -11559,6 +11555,7 @@ folder.php
 fi_FI.php
 fastsearch.php.save
 fastsearch.php
+bitstat
 exhibits.php
 exhibitions.php
 exhibitdetails.php
@@ -12134,6 +12131,8 @@ crypt.inc.php
 create_account.php
 course_structure.php
 config_site.php
+config_omniview/
+config_omniview/config.ini
 column_left.php
 classes.php
 ca.js
@@ -12371,6 +12370,7 @@ pagerTest.php
 overlib.js
 output.php
 orders.tpl
+updated
 order_updated.tpl
 order_invoice.tpl
 order_data.tpl
@@ -12387,6 +12387,8 @@ npdata.ser
 notification.inc.php
 no.tpl
 newsletter_admin.tpl
+newsletter_manage
+newsletter_manage/
 news_lists.tpl
 news_archive.tpl
 network.php
@@ -12654,6 +12656,7 @@ ans.pl
 anot3.htr
 anot.htr
 ajax.js
+ajax.jsp
 af.js
 aexp4b.htr
 aexp4.htr
@@ -12721,6 +12724,7 @@ SQLStore.php
 SEF.php
 RFC822.php
 QuoteLatex.php
+postgresql
 PostgreSQLStore.php
 Phphighlight.php
 PdfLatex.php
@@ -13657,10 +13661,12 @@ spambot_arrest.tpl
 sourcewindow.cfm
 source_html.js
 source.asp
+sourceroute
 sound.js
 sort_pointer.tpl
 sort.jsp
 snoopy.php
+snapshots
 snapshots_gen.tpl
 snapshots.tpl
 smpolicy.mdb
@@ -14581,7 +14587,10 @@ froogle.tpl
 french_mimes.php
 freebasic.php
 free_offers.tpl
+frameset
 frameset.js
+frames.php
+frames
 fpsrvadm.exe
 fpremadm.exe
 fpcount.exe
@@ -15655,6 +15664,7 @@ A.php
 5.0.45
 5.0.41
 403.tpl
+403
 4.8
 4.7
 4.6
@@ -16488,6 +16498,7 @@ slide.js~
 slide.js
 slabel.php
 skin.php
+sitestats/
 sitestats.php
 sitesetup.php
 siteroot.php
@@ -17317,6 +17328,7 @@ news_top.php
 news_randomnews.php
 news_moderate.php
 news_bigstory.php
+_archives/
 news_archives.php
 newsLib.class.php
 news.tpl.php
@@ -17631,6 +17643,7 @@ mailus.php
 mailto2.php
 maillist.txt
 maillest.php
+mailing-lists
 mailing_list.php
 mail_queue.php
 mail_2.php
@@ -19015,6 +19028,7 @@ corpo.php
 corp.php
 corinser.com/
 core_functions.php
+core_modules
 core.html.fr
 core.html.en
 copytemplate.php
@@ -19984,6 +19998,7 @@ UserAlbumTest.class
 Uroda.php
 UrlSerializer.js
 UploadedItem.inc
+uploaded_images
 UploadItems.tpl
 UploadItems.inc
 Upload.php

@@ -26,7 +26,7 @@ def timer(length):
     print("\n")
   
 
-def query_dork(domain):
+def query_dork(domain, directory):
     """
     query_dork: function to search google dork
     """
@@ -62,6 +62,11 @@ def query_dork(domain):
                 if req.status_code == 200:
                     found = True
                     print("{}{}".format(PLUS, j))
+                    with open(directory+"/result_dork.txt", 'w+') as result_dork:
+                        try:
+                            result_dork.write(str(j))
+                        except:
+                            pass
         except Exception as e:
             if "429" in str(e):
                 print("{}[429] Google blocked us, please wait 1 minute...".format(LESS))
