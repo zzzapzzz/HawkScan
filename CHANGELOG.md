@@ -1,5 +1,9 @@
 Changelog:
 ----------
+- 1.6
+	Add: degoogle tools for google dork queries, more fast and less of google captcha
+	Update: Code optimization
+
 - 1.5.9.1
 	Fix bugs
 

@@ -43,30 +43,28 @@ class parsing_html:
         """
         s3_keyword = ["S3://", "s3-", "amazonaws", "aws."]
         for s3_f in s3_keyword:
-            try:
-                reqtext = req.text.split(" ")
-            except:
-                reqtext = req.body().split(" ")
+            reqtext = req.text.split(" ")
             for req_key in reqtext:
                 req_value = req_key.split('"')
-                for r in req_value:
-                    if s3_f in r:
+                for rv in req_value:
+                    if s3_f in rv:
                         if not os.path.exists(directory + "/s3_links.txt"):
                             with open(directory + "/s3_links.txt", "a+") as s3_links:
-                                s3_links.write(str(r+"\n"))
+                                s3_links.write(str(rv+"\n"))
                         else:
                             with open(directory + "/s3_links.txt", "a+") as read_links:
                                 for rl in read_links.readlines():
-                                    if r == rl:
+                                    print("{}:{}".format(rv, rl))
+                                    if rv == rl:
                                         pass
                                     else:
                                         try:
-                                            req_s3 = requests.get(r, verify=False)
-                                            if req_s3.status_code == 200 and ["jpg","png","jpeg"] in [r]:
-                                                print("{} Potentialy s3 buckets found with reponse 200: {}".format(S3, r))
-                                                read_links.write(r)
+                                            req_s3 = requests.get(rv, verify=False)
+                                            if req_s3.status_code == 200:
+                                                print("{} Potentialy s3 buckets found with reponse 200: {}".format(S3, rv))
+                                                read_links.write(rv)
                                         except:
-                                            pass
+                                            traceback.print_exc()
 
 
     def mail(self, req, directory, all_mail):

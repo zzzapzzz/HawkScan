@@ -8,10 +8,11 @@ import socket
 import pprint
 import traceback
 from requests.exceptions import Timeout
+import time
 # External
 from config import PLUS, WARNING, INFO, LESS, LINE, FORBI, BACK
 
-class mini_checks:
+class before_start:
     
 
     def get_header(self, url, directory):

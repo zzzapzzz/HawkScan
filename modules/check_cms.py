@@ -15,8 +15,8 @@ class check_cms:
         req = requests.get("https://whatcms.org/APIEndpoint/Detect?key=1481ff2f874c4942a734d9c499c22b6d8533007dd1f7005c586ea04efab2a3277cc8f2&url={}".format(url))
         if "Not Found" in req.text:
             with open(directory + "/cms.txt", "w+") as cms_write:
-                cms_write.write("  this website does not seem to use a CMS")
-            print("\t{} this website does not seem to use a CMS \n".format(LESS))
+                cms_write.write("this website does not seem to use a CMS")
+            print("{} This website does not seem to use a CMS \n".format(LESS))
             print(LINE)
             return False, False;
         else:
@@ -26,12 +26,12 @@ class check_cms:
             if v:
                 with open(directory + "/cms.txt", "w+") as cms_write:
                     cms_write.write("This website use {} {}".format(result, v))
-                print("\t{} This website use \033[32m{} {} \033[0m\n".format(PLUS, result, v))
+                print("{} This website use \033[32m{} {} \033[0m\n".format(PLUS, result, v))
                 return result, v;
             else:
                 with open(directory + "/cms.txt", "w+") as cms_write:
                     cms_write.write("  This website use {} but nothing version found".format(result))
-                print("\t{} This website use \033[32m{}\033[0m but nothing version found \n".format(PLUS, result))
+                print("{} This website use \033[32m{}\033[0m but nothing version found \n".format(PLUS, result))
                 print(LINE)
                 return False, False;
                 
@@ -57,7 +57,7 @@ class check_cms:
                         detail = p.find("a").text.strip()
                         print("  {}{} : {}".format(WARNING, dates, detail))
                 else:
-                    print("  {} Nothing wpvunldb found \n".format(LESS))
+                    print("{} Nothing wpvunldb found \n".format(LESS))
         elif 'WordPress' in req.text:
             version =  v.replace('.','')
             site = "https://wpvulndb.com/wordpresses/{}".format(version)

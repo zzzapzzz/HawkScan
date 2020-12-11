@@ -5,11 +5,8 @@
 Security Tool for Reconnaissance and Information Gathering on a website. (python 2.x & 3.x)
 
 # News
-**!** Fix bugs       
-**!** Start: Code optimization       
-**!** Update: file and directory function management     
-**!** Add: New exclude type, exclude byte number (--exclude 1337b)    
-**!** Add: Function to try if the website IP is different of the website domain    
+**!** Code optimization
+**!** Add the degoogle for google dork queries  
 *(for more details go on CHANGELOG.md)*
 
 # Installation
@@ -41,8 +38,8 @@ Security Tool for Reconnaissance and Information Gathering on a website. (python
  - [x] Search S3 buckets in source code page
  - [x] Testing if it's possible scanning with "localhost" host
  - [x] Try differents bypass for 403 code error
- - [x] JS parsing and analysis
- - [x] Google Dork 
+ - [x] JS parsing and analysis (option --js)
+ - [x] Check Google Dork 
  - [x] Check Host IP
  
 # TODO 
@@ -52,7 +49,6 @@ Security Tool for Reconnaissance and Information Gathering on a website. (python
  - [ ] Prefix filename (old_, copy of...) [P1]
  - [ ] Multiple website scanning [P2]
  - [ ] Check HTTP headers/ssl security [P2]
- - [ ] Fuzzing amazonaws S3 Buckets [P2]
  - [ ] Anonymous routing through some proxy (http/s proxy list) [P2]
  - [ ] Access token [P2]
  - [ ] Check source code and verify leak or sensitive data in the Github [P2]
@@ -132,3 +128,5 @@ This script use "WafW00f" to detect the WAF in the first step (https://github.co
 This script use "Sublist3r" to scan subdomains (https://github.com/aboul3la/Sublist3r)
 
 This script use "waybacktool" to check in waybackmachine (https://github.com/Rhynorater/waybacktool)
+
+This script use "degoogle" to check google dork queries (https://github.com/deepseagirl/degoogle)
