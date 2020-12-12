@@ -1,7 +1,9 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-
-from degoogle import dg
+try:
+    from degoogle import dg
+except:
+    from modules.degoogle import dg
 import sys
 import requests
 from config import PLUS, WARNING, INFO, LINE, LESS

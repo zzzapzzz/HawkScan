@@ -1,4 +1,5 @@
 import sys
+from config import INFO
 try:
     from tools.Sublist3r import sublist3r
 except Exception:
