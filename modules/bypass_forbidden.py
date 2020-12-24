@@ -18,9 +18,9 @@ def original_url(res, page, url):
 	header = {
 	"X-Originating-URL": page
 	}
-	req = requests.get(res, verify=False, headers=header, allow_redirects=False)
-	if req.status_code not in [403, 401, 404, 429, 301, 302, 400, 408, 503, 405, 428, 412, 666]:
-		print("{}[{}] {} Forbidden Bypass with: 'X-Originating-URL: {}'".format(BYP, req.status_code, url+page, page))
+	req_ou = requests.get(res, verify=False, headers=header, allow_redirects=False)
+	if req_ou.status_code not in [403, 401, 404, 429, 301, 302, 400, 408, 503, 405, 428, 412, 666]:
+		print("{}[{}] {} Forbidden Bypass with: 'X-Originating-URL: {}'".format(BYP, req_ou.status_code, url+page, page))
 
 
 def IP_authorization(res, url):
@@ -28,20 +28,22 @@ def IP_authorization(res, url):
 	header = {
 	"X-Custom-IP-Authorization": "127.0.0.1"
 	}
-	req = requests.get(res, verify=False, headers=header, allow_redirects=False)
-	if req.status_code not in [403, 401, 404, 429, 301, 302, 400, 408, 503, 405, 428, 412, 666]:
-		print("{}[{}] {} Forbidden Bypass with: 'X-Originating-URL: {}'".format(BYP, req.status_code, url+page, page))
+	req_ip = requests.get(res, verify=False, headers=header, allow_redirects=False)
+	if req_ip.status_code not in [403, 401, 404, 429, 301, 302, 400, 408, 503, 405, 428, 412, 666]:
+		print("{}[{}] {} Forbidden Bypass with: 'X-Originating-URL: {}'".format(BYP, req_ip.status_code, url+page, page))
 
 
 def other_bypass(url, page, req_url):
 	payl = [page+"/.", "/"+page+"/", "./"+page+"/./", "%2e/"+page, page+"/.;/", ".;/"+page, page+"..;", page+"/;/"] #http://exemple.com/+page+bypass
+	len_req_url = len(req_url.content)
+	ranges = range(len_req_url - 50, len_req_url + 50) if len_req_url < 100000 else range(len_req_url - 1000, len_req_url + 1000)
 	for p in payl:
 		url_b = url + p
-		#print(url_b)
-		req = requests.get(url_b, verify=False, allow_redirects=True)
-		#print(req.status_code)
-		if req.status_code not in [403, 401, 404, 429, 301, 302, 400, 408, 503, 405, 428, 412, 666] and len(req.content) != len(req_url.content):
-			print("{}[{}] Forbidden Bypass with : {}".format(BYP, req.status_code, url_b))
+		req_payload = requests.get(url_b, verify=False, allow_redirects=False)
+		#print(req_payload.status_code) #DEBUG
+		#print("{}:{}".format(len(req_payload.content), len(req_url.content))) #DEBUG
+		if req_payload.status_code not in [403, 401, 404, 429, 301, 302, 400, 408, 503, 405, 428, 412, 666] and len(req_payload.content) not in ranges:
+			print("{}[{}] Forbidden Bypass with : {}".format(BYP, req_payload.status_code, url_b))
 
 
 

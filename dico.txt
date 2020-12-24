@@ -32,6 +32,12 @@ __clockwork
 static../.git/config
 static../config.js
 contact/
+conf.d/mod_evasive.conf
+conf.d/evasive.conf
+conf.d/
+evasive.conf
+mod_evasive.conf
+mods-available/evasive.conf
 contact.php
 include.php
 includes.php
@@ -120,6 +126,9 @@ config.selector
 .git/refs/remotes/origin/master
 .git/refs/tags
 .git2/
+.github/workflows/nodejs.yml
+.github/
+.github/workflows/
 bundles.php
 router.php
 phparea
@@ -223,6 +232,7 @@ apache2triadcp/
 apache.conf
 config-db.php
 fb_proxy.php
+proxy.conf
 admin/home/collection/
 comments/%22slapd.conf/%22ftp:/ManyServers.htm
 AuthenticationEvents.php
@@ -743,6 +753,8 @@ People/
 Press/
 Privacy/
 PrivacyPolicy/
+policy.md
+POLICY.md
 Products/
 Projects/
 Prova/
@@ -1446,6 +1458,7 @@ certenroll/
 certificate/
 ssl-certificate
 ssl-certificate/
+ssl.conf
 certificates/
 certification/
 certs/
@@ -1625,6 +1638,8 @@ condo/
 condom/
 conecta/
 conf/
+zconf/service.xml
+zconf/
 conference/
 conferences/
 configs/
@@ -5661,6 +5676,7 @@ aboutus
 aboutus.%EXT%
 abstractsadmin
 acceptance_config.yml
+funders.yml
 acceso
 acceso.php
 access

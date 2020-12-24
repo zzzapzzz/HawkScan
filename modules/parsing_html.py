@@ -7,7 +7,6 @@ import traceback
 
 requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
-urls_s3 = []
 
 class parsing_html:
     """
@@ -53,25 +52,25 @@ class parsing_html:
                                 s3_links.write(str(rv+"\n"))
                         else:
                             with open(directory + "/s3_links.txt", "a+") as read_links:
-                                for rl in read_links.readlines():
-                                    print("{}:{}".format(rv, rl))
-                                    if rv == rl:
+                                if any(rl.strip() == rv.strip() for rl in read_links.readlines()):
+                                    pass
+                                else:
+                                    try:
+                                        req_s3 = requests.get(rv, verify=False)
+                                        if req_s3.status_code == 200:
+                                            print("{}[200] Potentialy s3 buckets found: {}".format(S3, rv))
+                                            read_links.write(rv + "\n")
+                                    except:
                                         pass
-                                    else:
-                                        try:
-                                            req_s3 = requests.get(rv, verify=False)
-                                            if req_s3.status_code == 200:
-                                                print("{} Potentialy s3 buckets found with reponse 200: {}".format(S3, rv))
-                                                read_links.write(rv)
-                                        except:
-                                            traceback.print_exc()
+                                        #traceback.print_exc()
 
 
-    def mail(self, req, directory, all_mail):
+    def mail(self, req, directory):
         """
         Mail:
         get mail adresse in web page during the scan and check if the mail leaked
         """
+        write_mail = True
         mails = req.text
         # for all @mail
         reg = re.compile(r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+")
@@ -81,19 +80,18 @@ class parsing_html:
             if mail and not "png" in mail or not "jpg" in mail or not "jpeg" in mail:
                 datas = { "act" : mail, "accounthide" : "test", "submit" : "Submit" }
                 req_ino = requests.post("https://www.inoitsu.com/", data=datas, verify=False)
-                if "DETECTED" in req_ino.text:
-                    pwnd = "{}: pwned ! ".format(mail)
-                    if pwnd not in all_mail:
-                        all_mail.append(pwnd)
-                else:
-                    no_pwned = "{}: no pwned ".format(mail)
-                    if no_pwned not in all_mail:
-                        all_mail.append(no_pwned)
-        with open(directory + '/mail.csv', 'a+') as file:
-            if all_mail is not None and all_mail != []:
-                writer = csv.writer(file)
-                for r in all_mail:
-                    writer.writerow(r.split(":"))
+                res_pwned = "{}: pwned ! ".format(mail) if "DETECTED" in req_ino.text else "{}: no pwned ".format(mail)
+                if os.path.exists(directory + '/mail.csv'):
+                    with open(directory + '/mail.csv', 'r+') as read_csv_file:
+                        read_file = csv.reader(read_csv_file)
+                        for r_mail in read_file:
+                            if res_pwned.split(":")[0] == r_mail[0]:
+                                write_mail = False
+                if write_mail == True:
+                    with open(directory + '/mail.csv', 'a+') as write_csv_file:
+                        writer = csv.writer(write_csv_file)
+                        writer.writerow(res_pwned.split(":"))
+                        write_mail = False
 
 
     def sitemap(self, req, directory):
@@ -122,7 +120,7 @@ class parsing_html:
             "SSH_privKey":r"([-]+BEGIN [^\s]+ PRIVATE KEY[-]+[\s]*[^-]*[-]+END [^\s]+ PRIVATE KEY[-]+)",
         }
 
-        url_index = url.split("/")[0:3]
+        url_index = url.split("/")[0:3] if "http" in url else url
         url_index = "/".join(url_index)
         UNINTERESTING_EXTENSIONS = ['css', 'svg', 'png', 'jpeg', 'jpg', 'mp4', 'gif']
         UNINTERESTING_JS_FILES = ['bootstrap', 'jquery']
@@ -131,8 +129,8 @@ class parsing_html:
          => interesting ? false positive ?
         """
         INTERESTING_KEY = ['ApiKey', 'appKey', '_public_key', '_TOKEN', '_PASSWORD', '_DATABASE', 
-        'SECRET_KEY', 'client_secret', '_secret', '_session', 'api_key', 'APPKey']
-        text = req.content.decode('utf-8')
+        'SECRET_KEY', 'client_secret', '_secret', 'api_key', 'APPKey']
+        text = req.content
         regex = r'''((https?:)?[/]{1,2}[^'\"> ]{5,})|(\.(get|post|ajax|load)\s*\(\s*['\"](https?:)?[/]{1,2}[^'\"> ]{5,})'''
         if ".js" in url:
             for keyword_match in INTERESTING_KEY:

@@ -2,7 +2,7 @@ import requests
 import socket
 import traceback
 from modules.detect_waf import verify_waf
-from config import PLUS, WARNING, INFO
+from config import PLUS, WARNING, INFO, WAF
 
 requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
@@ -44,7 +44,7 @@ def bypass_waf(req, res):
 				#print(vrfy)
 				if vrfy == False:
 					#win = True
-					print("{}You can potentially bypass the WAF rate limit with: \033[34m{}\033[0m !".format(INFO, headers))
+					print("{}Potential bypass WAF rate limit with: \033[36m{}\033[0m".format(WAF, headers))
 					return headers
 			except Exception:
 				traceback.print_exc()
@@ -57,7 +57,7 @@ def bypass_waf(req, res):
 			vrfy = verify_waf(req, res, headers, display)
 			if vrfy == False:
 				#win = True
-				print("{}You can potentially bypass the WAF rate limit with: \033[34m{}\033[0m !".format(INFO, headers))
+				print("{}Potential bypass WAF rate limit with: \033[36m{}\033[0m".format(WAF, headers))
 				return headers
 		except:
 			traceback.print_exc()

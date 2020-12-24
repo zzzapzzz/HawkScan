@@ -53,7 +53,9 @@ def query_dork(domain, directory):
     'site:{} ext:txt OR ext:url OR ext:wml OR ext:xls OR ext:xlsx OR ext:xml OR ext:xsd OR ext:yml OR ext:NEW OR ext:save'.format(domain),
     'site:{} intitle:"index of"'.format(domain),
     'site:{} intitle:"index of" .env'.format(domain),
-    '"{}" inurl:gitlab OR site:pastebin.com'.format(domain)
+    '"{}" inurl:gitlab OR site:pastebin.com'.format(domain),
+    'Org:{} "password"'.format(domain),
+    'site:atlassian.net {}'.format(domain)
     ]
     degoogler = dg()
     for query in queries:
@@ -61,7 +63,12 @@ def query_dork(domain, directory):
         degoogler.query = query
         results = degoogler.run()
         for result in results:
-            print("{} {}".format(PLUS, result['url']))
+            try:
+                req_url_found = requests.get(result['url'], verify=False)
+                if req_url_found.status_code not in [404, 408, 503, 405, 428, 412, 429]:
+                    print("{} [{}] {}".format(PLUS, req_url_found.status_code, result['url']))
+            except:
+                pass
         print("")
     print(LINE)
 

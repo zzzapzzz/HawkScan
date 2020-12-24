@@ -22,12 +22,12 @@ def create_report(directory, cookie_):
                 s = s.split(" ")
                 s0 = s[0]
                 s1 = s[1]
-                if s0 == "[+]":
+                if s0 == "[-]" or s0 == "[+]":
                     if "301" in s or "302" in s:
                         if s[2] == "301":
-                            s0 = s0.replace("[+]", "301")
+                            s0 = s0.replace("[-]", "301")
                         elif s[2] == "302":
-                            s0 = s0.replace("[+]", "302")
+                            s0 = s0.replace("[-]", "302")
                         urls += """
                             <tr style="display:none;" class="value300">
                             <td style="color: orange; ">{}</td>
@@ -45,7 +45,7 @@ def create_report(directory, cookie_):
                         </tr>
                         """.format(nowdate, s1, s1, s0)
                 elif s0 == "[x]":
-                    s0 = s0.replace("[x]", "403")
+                    s0 = s0.replace("[x]", "403") if s[2] == "403" else s0.replace("[x]", "401")
                     urls += """
                         <tr style="display:none;" class="value403">
                         <td style="color: red;">{}</td>
@@ -53,26 +53,13 @@ def create_report(directory, cookie_):
                         <td style="color: red;">{}</td>
                         </tr>
                         """.format(nowdate, s1, s1, s0)
-                elif s0 == "[-]":
-                    if "401" in s:
-                        if s[2] == "401":
-                            s0 = s0.replace("[-]","401")
-                        urls += """
-                            <tr style="display:none;" class="value401">
+                elif s0 == "[!]":
+                    s0 = s0.replace("[!]", "400") if s[2] == "400" else s0.replace("[!]", "500")
+                    urls += """
+                            <tr style="display:none;" class="value4500">
                             <td style="color: orange; ">{}</td>
                             <td style="color: orange; "><a href="{}" target="_blank" style="color: white;">{}</a></td>
                             <td style="color: orange; ">{}</td>
-                            </tr>
-                            """.format(nowdate, s1, s1, s0)
-                elif s0 == "[!]":
-                    if "400" in s:
-                        if s[2] == "400":
-                            s0 = s0.replace("[!]","400")
-                        urls += """
-                            <tr style="display:none;" class="value400">
-                            <td style="color: red; ">{}</td>
-                            <td style="color: red; "><a href="{}" target="_blank" style="color: white;">{}</a></td>
-                            <td style="color: red; ">{}</td>
                             </tr>
                             """.format(nowdate, s1, s1, s0)
         try:
@@ -206,7 +193,8 @@ def create_report(directory, cookie_):
                                   <option value="-1">All</option>
                                   <option value="plus">200</option>
                                   <option value="redirect">301/302</option>
-                                  <option value="forbi">403</option>
+                                  <option value="forbi">401/403</option>
+                                  <option value="serv_error">400/500</option>
                                 </select>
                                 <br>
                                     <tr>

@@ -1,12 +1,16 @@
-# HawkScan
+# HawkScan *V1.6.6*
 
 ![alt tag](https://github.com/c0dejump/HawkScan/blob/master/static/logo.jpg)
 
 Security Tool for Reconnaissance and Information Gathering on a website. (python 2.x & 3.x)
 
 # News
-**!** Code optimization
-**!** Add the degoogle for google dork queries  
+**!** Faster          
+**!** Updated: Less FP with bypass forbidden function        
+**!** Updated: Less errors        
+**!** Updated: Little modifications in report        
+**!** Fixed: Style and system bugs        
+**!** Added: Auto resize relative to window        
 *(for more details go on CHANGELOG.md)*
 
 # Installation
@@ -41,18 +45,19 @@ Security Tool for Reconnaissance and Information Gathering on a website. (python
  - [x] JS parsing and analysis (option --js)
  - [x] Check Google Dork 
  - [x] Check Host IP
+ - [x] Auto resize relative to window
  
 # TODO 
 **P1 is the most important**
 
- - [ ] On-the-fly writing report [P1]
- - [ ] Prefix filename (old_, copy of...) [P1]
+ - [ ] Multiple exclude like: --exclude 403,1337b [P1]
+ - [ ] On-the-fly writing report [P2]
+ - [ ] Prefix filename (old_, copy of...) [P2]
  - [ ] Multiple website scanning [P2]
  - [ ] Check HTTP headers/ssl security [P2]
  - [ ] Anonymous routing through some proxy (http/s proxy list) [P2]
  - [ ] Access token [P2]
  - [ ] Check source code and verify leak or sensitive data in the Github [P2]
- - [ ] Auto resize relative to window [P2]
  - [ ] Analyse html code webpage [P3] => really necessary?
  - [ ] Check phpmyadmin version [P3]
  - [ ] Scan API endpoints/informations leaks [ASAP]
