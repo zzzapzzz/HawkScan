@@ -1,4 +1,4 @@
-# HawkScan *V1.6.6*
+# HawkScan
 
 ![alt tag](https://github.com/c0dejump/HawkScan/blob/master/static/logo.jpg)
 
