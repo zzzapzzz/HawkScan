@@ -12,9 +12,10 @@ from bs4 import BeautifulSoup
 import json
 import traceback
 from requests.exceptions import Timeout
+from requests.auth import HTTPBasicAuth
 
 # external modules
-from config import PLUS, WARNING, INFO, LESS, LINE, FORBI, BACK, EXCL, SERV_ERR
+from config import PLUS, WARNING, INFO, LESS, LINE, FORBI, BACK, EXCL, SERV_ERR, BYP
 try:
     from Queue import Queue
 except:
@@ -55,6 +56,7 @@ stat = 0
 
 tw, th = terminal_size() # determine terminal size
 
+header_parsed = {}
 
 class ThreadManager:
     """
@@ -241,6 +243,20 @@ def status(r, stat, directory, u_agent, thread, manageDir):
         except:
             pass
         print(LINE)
+
+    if auth:
+        r = requests.get(url, allow_redirects=False, verify=False, auth=(auth.split(":")[0], auth.split(":")[1]))
+        if r.status_code in [200, 302, 301]:
+            print("{} Authentification successfull\n".format(PLUS))
+            stat = r.status_code
+        else:
+            print("{} Authentification error".format(LESS))
+            try:
+                continue_error = raw_input("The authentification seems bad, continue ? [y/N]")
+            except:
+                continue_error = input("The authentification seems bad, continue ? [y/N]")
+            if continue_error not in ["y", "Y"]:
+                sys.exit()
 
     if stat == 200:
         check_words(url, wordlist, directory, u_agent, thread)
@@ -438,12 +454,12 @@ def backup_ext(s, res, page, directory, forbi, HOUR, parsing, filterM):
                         filterM.check_exclude_code(res_b, req_b, directory, HOUR, parsing)
                     else:
                         filterM.check_exclude_page(req_b, res_b, directory, forbi, HOUR, parsing)
-                        with open(r_files+"-file.txt", 'w+') as fichier_bak:
+                        with open(r_files, 'w+') as fichier_bak:
                             fichier_bak.write(str(soup))
                         #print("{} {} {} ({} bytes)".format(HOUR, PLUS, res_b, size_bytes))
                 else:
                     print("{} {} {} ({} bytes)".format(HOUR, PLUS, res_b if tw > 120 else page_b, size_bytes))
-                    with open(r_files+"-file.txt", 'w+') as fichier_bak:
+                    with open(r_files, 'w+') as fichier_bak:
                         fichier_bak.write(str(soup))
                     output_scan(directory, res_b, 200)
                 size_check = size_bytes
@@ -490,18 +506,14 @@ def hidden_dir(res, user_agent, directory, forbi, HOUR, filterM):
     Like the function 'backup_ext' but check if the type backup dir like '~articles/' exist.
     """
     pars = res.split("/")
-    hidd_d = "{}~{}/".format(url, pars[3])
-    hidd_f = "{}~{}".format(url, pars[3])
+    hidd_tild = "{}~{}/".format(url, pars[3]) if pars[-1] == "" else "{}~{}".format(url, pars[3])
     if header_parsed:
         user_agent.update(header_parsed)
-        req_d = requests.get(hidd_d, headers=user_agent, allow_redirects=False, verify=False, timeout=10)
-        req_f = requests.get(hidd_f, headers=user_agent, allow_redirects=False, verify=False, timeout=10)
+        req_tild = requests.get(hidd_tild, headers=user_agent, allow_redirects=False, verify=False, timeout=10)
     else:
-        req_d = requests.get(hidd_d, headers=user_agent, allow_redirects=False, verify=False, timeout=10)
-        req_f = requests.get(hidd_f, headers=user_agent, allow_redirects=False, verify=False, timeout=10)
-    sk_d = req_d.status_code
-    sk_f = req_f.status_code
-    if sk_d == 200:
+        req_tild = requests.get(hidd_tild, headers=user_agent, allow_redirects=False, verify=False, timeout=10)
+    status_tild = req_tild.status_code
+    if status_tild not in [404, 403, 500, 400]:
         if exclude:
             if type(req_p) == int:
                 filterM.check_exclude_code(res, req, directory, HOUR, parsing)
@@ -510,15 +522,6 @@ def hidden_dir(res, user_agent, directory, forbi, HOUR, filterM):
         else:
             print("{} {} {} ({} bytes)".format(HOUR, PLUS, hidd_d, len(req_d.content)))
             output_scan(directory, hidd_d, 200)
-    elif sk_f == 200:
-        if exclude:
-            if type(req_p) == int:
-                filterM.check_exclude_code(res, req, directory, HOUR, parsing)
-            else:
-                filterM.check_exclude_page(req_f, res, directory, forbi, HOUR)
-        else:
-            print("{} {} {} ({} bytes)".format(HOUR, PLUS, hidd_f, len(req_f.content)))
-            output_scan(directory, hidd_f, 200)
 
 
 def scan_error(directory, forbi):
@@ -564,7 +567,7 @@ def scan_error(directory, forbi):
                 except Exception:
                     pass
                     #traceback.print_exc()
-                sys.stdout.write_error("\033[34m[i] {}\033[0m\r".format(error_link))
+                sys.stdout.write("\033[34m[i] {}\033[0m\r".format(error_link))
                 sys.stdout.flush()
             if errors_stat == False:
                 print("{} Nothing error error need to be fixed".format(PLUS))
@@ -604,24 +607,20 @@ def defined_thread(thread, i, score_next):
 
 def defined_connect(s, res, user_agent=False, header_parsed=False):
     allow_redirection = True if stat == 301 or stat == 302 or redirect else False
+    authent = (auth.split(":")[0], auth.split(":")[1]) if auth else False
+
+    header = header_parsed if header_parsed else user_agent
+
     JS_error = ["You need to enable JavaScript to run this app", "JavaScript Required", "without JavaScript enabled",
     "This website requires JavaScript", "Please enable JavaScript", "Loading"]
-    req = s.get(res, headers=user_agent, allow_redirects=allow_redirection, verify=False, timeout=10)
+
+    req = s.get(res, headers=header, allow_redirects=allow_redirection, verify=False, timeout=10, auth=authent)
     #print(req.status_code)
-    if header_parsed:
-        user_agent.update(header_parsed)
-        req = s.get(res, headers=user_agent, allow_redirects=allow_redirection, verify=False, timeout=10)
-        if any(js_e in req.text for js_e in JS_error):
-            #print("{} This URL need to active JS: {}".format(INFO, res)) #TODO
-            return False
-        else:
-            return req
+    if any(js_e in req.text for js_e in JS_error):
+        #print("{} This URL need to active JS: {}".format(INFO, res)) #TODO
+        return False
     else:
-        if any(js_e in req.text for js_e in JS_error):
-            #print("{} This URL need to active JS: {}".format(INFO, res)) #TODO
-            return False
-        else:
-            return req
+        return req
 
 def thread_wrapper(i, q, threads, manager, t_event, directory=False, forced=False, u_agent=False):
     while not q.empty() and not t_event.isSet():
@@ -692,7 +691,7 @@ def tryUrl(i, q, threads, manager=False, directory=False, forced=False, u_agent=
                         #print(try_bypass_waf) #DEBUG
                         #print(user_agent) #DEBUG
                         if try_bypass_waf == False: # if not worked not repeat
-                            print("\033[31m[-]\033[0m Our tests not bypass it, sorry")
+                            print("{}\033[31m[-]\033[0m Our tests not bypass it, sorry".format(BYP))
                             tested_bypass = True
                         elif try_bypass_waf and type(try_bypass_waf) is not bool:
                             user_agent.update(try_bypass_waf)
@@ -703,7 +702,7 @@ def tryUrl(i, q, threads, manager=False, directory=False, forced=False, u_agent=
                         if thread_count != 1:
                             thread_count += 1
                             stop_add_thread = True
-                            print("{} Auto-reconfig scan to prevent the WAF".format(INFO))
+                            print("{} Auto-reconfig scan to prevent the WAF".format(WAF))
                             manager.stop_thread()
                         #TODO: potentialy use TOR (apt install tor, pip install torrequest) for next requests after that.
                     #pass
@@ -1048,6 +1047,7 @@ if __name__ == '__main__':
     parser.add_argument("--auto", help="Automatic threads depending response to website. Max: 30", required=False, dest="auto", action='store_true')
     parser.add_argument("--update", help="For automatic update", required=False, dest="update", action='store_true')
     parser.add_argument("--js", help="For try to found keys or token in the javascript page", required=False, dest="javascript", action='store_true')
+    parser.add_argument("--auth", help="HTTP authentification \033[33m(Exemples: --auth admin:admin\033[0m", required=False, dest="auth")
     results = parser.parse_args()
                                      
     url = results.url
@@ -1066,17 +1066,19 @@ if __name__ == '__main__':
     auto = results.auto
     update = results.update
     js = results.javascript
+    auth = results.auth
 
     if len(sys.argv) < 2:
         print("{}URL target is missing, try using -u <url> or -h for help".format(INFO))
         sys.exit()
+
     banner()
+
     if update:
         auto_update()
-    if header_ and " " in header_:
-        header_ = header_.replace(" ","")
+
+
     len_w = 0 #calcul wordlist size
-    header_parsed = {}
     url = url + "/" if url.split("/")[-1] != "" else url
     if header_:
         s = header_.split(";")

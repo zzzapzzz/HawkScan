@@ -130,6 +130,10 @@ config.selector
 .github/
 .github/workflows/
 bundles.php
+obj/
+obj/Debug/
+obj/Debug/GLOSS2
+obj/Debug/Package/GLOSS2.SetParameters.xml
 router.php
 phparea
 php-source
@@ -4284,6 +4288,7 @@ sys/
 sysfail-ftp
 sysadmin/
 system/
+system/config.ini
 system_web/
 webhosting
 web-hosting
@@ -10476,6 +10481,9 @@ system/cron/cron.txt
 system/error.txt
 system/log/
 system/logs/
+system/config.php
+system/configDoctrine.php
+system/configSmarty.php
 system_administration/
 systemadmin
 SystemErr.log

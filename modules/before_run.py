@@ -180,6 +180,7 @@ class before_start:
 
 
     def check_localhost(self, url):
+        #TODO
         """
         CHeck_localhost: Function which try automatically if it's possible scanning with "localhost" host for discovery other files/directories
         """

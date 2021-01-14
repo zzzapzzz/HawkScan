@@ -52,6 +52,7 @@ Security Tool for Reconnaissance and Information Gathering on a website. (python
 
  - [ ] Multiple exclude like: --exclude 403,1337b [P1]
  - [ ] On-the-fly writing report [P2]
+ - [ ] Option for forcing checking before scan start [P2]
  - [ ] Prefix filename (old_, copy of...) [P2]
  - [ ] Multiple website scanning [P2]
  - [ ] Check HTTP headers/ssl security [P2]

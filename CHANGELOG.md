@@ -1,5 +1,12 @@
 Changelog:
 ----------
+
+- 1.6.7
+---------
+	Add: Option --auth for HTTP authentification. Exemple --auth admin:admin
+	Fixed: Bugs
+---------
+
 - 1.6.6
 ---------
 	Faster
