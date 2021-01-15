@@ -420,6 +420,8 @@ def backup_ext(s, res, page, directory, forbi, HOUR, parsing, filterM):
     
     d_files = directory + "/files/" #directory to download backup file if exist
 
+    authent = (auth.split(":")[0], auth.split(":")[1]) if auth else False
+
     for exton in ext_b:
         res_b = res + exton
         page_b = page + exton
@@ -437,7 +439,7 @@ def backup_ext(s, res, page, directory, forbi, HOUR, parsing, filterM):
                 req_check = s.get(res_b, allow_redirects=True, verify=False)
                 req_b = s.get(req_check.url, verify=False)
             else:
-                req_b = s.get(res_b, allow_redirects=False, verify=False, timeout=10)
+                req_b = s.get(res_b, allow_redirects=False, verify=False, timeout=10, auth=authent)
         soup = BeautifulSoup(req_b.text, "html.parser")
         req_b_status = req_b.status_code
         if req_b_status == 200:
