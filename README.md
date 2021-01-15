@@ -5,12 +5,8 @@
 Security Tool for Reconnaissance and Information Gathering on a website. (python 2.x & 3.x)
 
 # News
-**!** Faster          
-**!** Updated: Less FP with bypass forbidden function        
-**!** Updated: Less errors        
-**!** Updated: Little modifications in report        
-**!** Fixed: Style and system bugs        
-**!** Added: Auto resize relative to window        
+**!** Add: Option --auth for HTTP authentification. Exemple --auth admin:admin      
+**!** Fixed: Bugs     
 *(for more details go on CHANGELOG.md)*
 
 # Installation
